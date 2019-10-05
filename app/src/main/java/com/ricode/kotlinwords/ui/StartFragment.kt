@@ -6,10 +6,16 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.ricode.kotlinwords.R
+import com.ricode.kotlinwords.files.AssetHelper
 import kotlinx.android.synthetic.main.fragment_start.*
 
 
 class StartFragment : Fragment() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val assetHelper = AssetHelper(activity)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

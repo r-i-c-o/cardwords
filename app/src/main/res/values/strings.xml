@@ -3,9 +3,12 @@
     <string name="test_name">Test</string>
     <string name="learn_name">Learn</string>
     <string name="settings_name">Settings</string>
-    <!--Learn / Test section-->
+    <!-- Start Buttons -->
     <string name="button_learn">Learn</string>
     <string name="button_test">Test</string>
+    <string name="button_misc">Misc</string>
+    <string name="button_settings">Settings</string>
+    <!--Learn / Test section-->
     <string name="button_yes">Yes</string>
     <string name="button_show">Show</string>
     <string name="button_check">Check</string>
