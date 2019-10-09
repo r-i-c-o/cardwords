@@ -33,11 +33,12 @@ public class LearningHelper {
         return uniqueInstance;
     }
 
+
     private File getInternalFileDirectory() {
         return mContext.getFilesDir();
     }
 
-    // returning a file method
+    // file returning method
     private File getFile(String filename) {
         String file = filename + ".txt";
         return new File(getInternalFileDirectory(), file);
@@ -55,6 +56,7 @@ public class LearningHelper {
         return file.length() <= UNICODE_EMPTY_FILE_SIZE;
     }
 
+    //READ FILE
     private List<Word> getNWordsFromFile(int position, int n) {
         List<Word> words = new ArrayList<>();
         int counter = 1;
@@ -80,6 +82,7 @@ public class LearningHelper {
         return words;
     }
 
+    //READ FILE
     // get words from file
     public List<Word> getWordsFromFile(String filename) {
         List<Word> words = new ArrayList<>();
@@ -104,6 +107,7 @@ public class LearningHelper {
     }
 
 
+    //READ/WRITE FILE
     public List<Word> setupWords() {
         int position = getWordsPosition();
         List<Word> words;
@@ -117,6 +121,7 @@ public class LearningHelper {
         return current;
     }
 
+    //WRITE FILE
     // rewriting file method
     public void rewriteWordsInFile(String filename, List<Word> words) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(getFile(filename)))) {
@@ -140,6 +145,7 @@ public class LearningHelper {
 
     }
 
+    //WRITE FILE
     // appending word to file method
     public void appendWordToFile(String filename, Word w) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(getFile(filename), true))){
@@ -154,6 +160,7 @@ public class LearningHelper {
         }
     }
 
+    //TODO read position from shared prefs
     private int getWordsPosition() {
         int position;
         try(BufferedReader br = new BufferedReader(new FileReader(getPositionFile()))) {
