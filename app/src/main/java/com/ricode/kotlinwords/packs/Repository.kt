@@ -3,14 +3,15 @@ package com.ricode.kotlinwords.packs
 import android.content.Context
 
 //Singleton repository
-class Repository private constructor(val mContext: Context) {
+class Repository private constructor(context: Context) {
+    private val listComposer = ListComposer(context)
 
     fun getLearnWords(): List<Word> {
-        return emptyList()
+        return listComposer.wordsFromCurrent
     }
 
     fun getTestWords(): List<Word> {
-        return emptyList()
+        return listComposer.wordsFromOk
     }
 
     companion object {

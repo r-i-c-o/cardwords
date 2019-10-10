@@ -8,8 +8,6 @@ public class PackHelper {
 
     private Context mContext;
 
-    private static final int UNICODE_EMPTY_FILE_SIZE = 3;
-
     public PackHelper(Context context){
         mContext = context;
     }
