@@ -7,7 +7,11 @@ import com.ricode.kotlinwords.viewmodels.LearnViewModelFactory
 object InjectorUtils {
 
     fun provideLearnViewModelFactory(context: Context): LearnViewModelFactory {
-        return LearnViewModelFactory(getRepository(context))
+        return LearnViewModelFactory(getRepository(context).getLearnWords())
+    }
+
+    fun provideTestViewModelFactory(context: Context): LearnViewModelFactory {
+        return LearnViewModelFactory(getRepository(context).getTestWords())
     }
 
     private fun getRepository(context: Context): Repository {

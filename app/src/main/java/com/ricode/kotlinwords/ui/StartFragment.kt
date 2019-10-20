@@ -1,10 +1,11 @@
 package com.ricode.kotlinwords.ui
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.ricode.kotlinwords.R
 import com.ricode.kotlinwords.files.AssetHelper
 import kotlinx.android.synthetic.main.fragment_start.*
@@ -38,9 +39,13 @@ class StartFragment : Fragment() {
             val navController = v.findNavController()
             navController.navigate(R.id.action_startFragment_to_testFragment)
         }
+
+        button_settings.setOnClickListener { v ->
+            v.findNavController().navigate(R.id.action_startFragment_to_settingsFragment)
+        }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+    /*override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_start, menu)
     }
 
@@ -57,7 +62,7 @@ class StartFragment : Fragment() {
 
     private fun navigateToSettings() {
         findNavController().navigate(R.id.action_startFragment_to_settingsFragment)
-    }
+    }*/
 
 
 }

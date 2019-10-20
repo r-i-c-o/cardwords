@@ -9,11 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 // File helping class
-// TODO split class into smaller classes
 
 public class LearningHelper {
 
-    private static LearningHelper uniqueInstance;
     private Context mContext;
 
     private static final String TAG = "LearningHelper";
@@ -26,18 +24,12 @@ public class LearningHelper {
         mContext = context.getApplicationContext();
     }
 
-    public static LearningHelper getInstance(Context context) {
-        if (uniqueInstance == null) {
-            uniqueInstance = new LearningHelper(context);
-        }
-        return uniqueInstance;
-    }
-
-
+    //DEPRECATED
     private File getInternalFileDirectory() {
         return mContext.getFilesDir();
     }
 
+    //MOVED TO PACKHELPER
     // file returning method
     private File getFile(String filename) {
         String file = filename + ".txt";
@@ -109,7 +101,7 @@ public class LearningHelper {
 
     //READ/WRITE FILE
     public List<Word> setupWords() {
-        int position = getWordsPosition();
+        int position = 0;
         List<Word> words;
         List<Word> current = getWordsFromFile("current");
         if (current.size() <= 20) {
@@ -160,7 +152,8 @@ public class LearningHelper {
         }
     }
 
-    //TODO read position from shared prefs
+
+    //MOVED TO PACKHELPER
     private int getWordsPosition() {
         int position;
         try(BufferedReader br = new BufferedReader(new FileReader(getPositionFile()))) {
@@ -172,6 +165,7 @@ public class LearningHelper {
         }
         return position;
     }
+
 
     private void setWordsPosition(int position) {
         try(BufferedWriter wr = new BufferedWriter(new FileWriter(getPositionFile()))) {

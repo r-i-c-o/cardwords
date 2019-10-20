@@ -1,6 +1,7 @@
 package com.ricode.kotlinwords.packs;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import com.ricode.kotlinwords.utilities.ConstantsKt;
 import org.jetbrains.annotations.NotNull;
 
@@ -15,17 +16,17 @@ public class PackHelper {
         mContext = context.getApplicationContext();
     }
 
+    private SharedPreferences getAppSettings() {
+        return mContext.getSharedPreferences(ConstantsKt.SP_APP_SETTINGS, Context.MODE_PRIVATE);
+    }
+
     public String getCurrentPackName(){
         //read shared prefs
-        return mContext.getSharedPreferences(ConstantsKt.SP_NAME_CURRENT_PACK, Context.MODE_PRIVATE)
-                .getString(ConstantsKt.SP_NAME_CURRENT_PACK, "en_ru_common");
+        return getAppSettings().getString(ConstantsKt.SP_NAME_CURRENT_PACK, "en_ru_common");
     }
 
     public void setCurrentPackName(String name){
-        //write to shared prefs
-        mContext.getSharedPreferences(ConstantsKt.SP_NAME_CURRENT_PACK, Context.MODE_PRIVATE)
-                .edit().putString(ConstantsKt.SP_NAME_CURRENT_PACK, name)
-                .apply();
+        getAppSettings().edit().putString(ConstantsKt.SP_NAME_CURRENT_PACK, name).apply();
     }
 
     public int getPackPosition() {
@@ -39,13 +40,14 @@ public class PackHelper {
                 .apply();
     }
 
-    public File getPackFile(String name) {
+    public File getPackFile(PackNames name) {
         File dir = new File(mContext.getFilesDir(), getCurrentPackName());
-        if (name.equals("pack")) {
+        if (name == PackNames.PACK) {
             String file = getCurrentPackName() + ".txt";
             return new File(dir, file);
         } else {
-            return new File(dir, name);
+            String filename = name.toString();
+            return new File(dir, filename);
         }
     }
 
