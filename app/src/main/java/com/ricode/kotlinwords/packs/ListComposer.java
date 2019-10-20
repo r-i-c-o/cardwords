@@ -1,29 +1,32 @@
 package com.ricode.kotlinwords.packs;
 
 import android.content.Context;
-import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class ListComposer {
 
-    private Context mContext;
-    private PackHelper mPackHelper;
+    private WordManager mManager;
 
-    public ListComposer(@NotNull Context context) {
-        mContext = context.getApplicationContext();
-        mPackHelper = new PackHelper(mContext);
+    public ListComposer(Context context) {
+        Context mContext = context.getApplicationContext();
+        mManager = new WordManager(mContext);
     }
 
     public List<Word> getWordsFromLearn() {
-        return Collections.emptyList();
+        return mManager.setupWords();
     }
 
     public List<Word> getWordsFromTest() {
-        List<Word> words = new ArrayList<>();
-        return words;
+        return mManager.getAllWordsFromFile(PackNames.TEST);
+    }
+
+    private List<Word> makeLearnList() {
+        /*if repeat file contains @number_of_words or more, then
+        return list with @number_of_words
+        * if repeat file contains less than @number_of_words, then add from pack file*/
+        return Collections.emptyList();
     }
 
 }

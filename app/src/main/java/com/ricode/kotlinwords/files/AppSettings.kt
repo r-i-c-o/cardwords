@@ -2,20 +2,23 @@ package com.ricode.kotlinwords.files
 
 import android.content.Context
 import com.ricode.kotlinwords.utilities.SP_APP_SETTINGS
+import com.ricode.kotlinwords.utilities.SP_SETTINGS_NUMBER_TRIES
 import com.ricode.kotlinwords.utilities.SP_SETTINGS_NUMBER_WORDS
 
-class Settings(context: Context) {
+class AppSettings(context: Context) {
 
     private val mContext: Context = context.applicationContext
 
-    val numberOfWords: Int
-        get() = mContext.getSharedPreferences(SP_APP_SETTINGS, Context.MODE_PRIVATE)
-            .getInt(SP_SETTINGS_NUMBER_WORDS, 20)
+    private fun appSettings() = mContext.getSharedPreferences(SP_APP_SETTINGS, Context.MODE_PRIVATE)
+
+    fun getNumberOfWords() = appSettings().getInt(SP_SETTINGS_NUMBER_WORDS, 20)
 
     fun setNumberOfWords(num: Int) {
-        mContext.getSharedPreferences(SP_APP_SETTINGS, Context.MODE_PRIVATE)
+        appSettings()
             .edit()
             .putInt(SP_SETTINGS_NUMBER_WORDS, 20)
             .apply()
     }
+
+    fun getNumberOfTries() = appSettings().getInt(SP_SETTINGS_NUMBER_TRIES, 3)
 }

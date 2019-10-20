@@ -12,9 +12,9 @@ public class WordManager {
 
     private PackHelper mPackHelper;
 
-    private static final String TAG = "WM";
+    private static final String TAG = "WordManager";
 
-    private WordManager(Context context) {
+    public WordManager(Context context) {
         Context mContext = context.getApplicationContext();
         mPackHelper = new PackHelper(mContext);
     }
@@ -31,8 +31,9 @@ public class WordManager {
         return file.length() <= ConstantsKt.UNICODE_EMPTY;
     }
 
-    private List<Word> getNWordsFromFile(int position, int n) {
+    private List<Word> getNWordsFromCurrentPosition(int n) {
         List<Word> words = new ArrayList<>();
+        int position = mPackHelper.getPackPosition();
         int counter = 1;
         String line;
         try(BufferedReader reader = new BufferedReader(new FileReader(getWordsFile()))){
@@ -74,14 +75,14 @@ public class WordManager {
         return words;
     }
 
-
     //TODO MOVE TO LISTCOMPOSER
     public List<Word> setupWords() {
         List<Word> words;
+
         List<Word> current = getAllWordsFromFile(PackNames.LEARN);
         if (current.size() <= 20) {
             //adding words from words file
-            words = getNWordsFromFile(getWordsPosition(), 20 - current.size());
+            words = getNWordsFromCurrentPosition(20 - current.size());
             current.addAll(words);
         }
         rewriteWordsInFile(PackNames.LEARN, current);

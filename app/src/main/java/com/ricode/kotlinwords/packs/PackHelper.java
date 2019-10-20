@@ -2,6 +2,7 @@ package com.ricode.kotlinwords.packs;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import com.ricode.kotlinwords.utilities.ConstantsKt;
 import org.jetbrains.annotations.NotNull;
 
@@ -21,7 +22,6 @@ public class PackHelper {
     }
 
     public String getCurrentPackName(){
-        //read shared prefs
         return getAppSettings().getString(ConstantsKt.SP_NAME_CURRENT_PACK, "en_ru_common");
     }
 
@@ -31,7 +31,7 @@ public class PackHelper {
 
     public int getPackPosition() {
         return mContext.getSharedPreferences(ConstantsKt.SP_PACK_PROPERTIES + "_" + getCurrentPackName(), Context.MODE_PRIVATE)
-                .getInt(ConstantsKt.SP_PACK_POSITION, 0);
+                .getInt(ConstantsKt.SP_PACK_POSITION, 1);
     }
 
     public void setPackPosition(int pos) {
@@ -53,6 +53,11 @@ public class PackHelper {
 
     public void createPackDirectory(String name){
         //create directory with {name} and add 4 files
+        File appDir = mContext.getFilesDir();
+        File dir = new File(appDir, name);
+        if(dir.mkdir()) {
+            Log.i("createDir","created");
+        } else Log.e("createDir","not created");
     }
 
 }

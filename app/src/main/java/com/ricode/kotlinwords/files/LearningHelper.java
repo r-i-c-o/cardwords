@@ -1,3 +1,4 @@
+/*
 package com.ricode.kotlinwords.files;
 
 import android.content.Context;
@@ -16,7 +17,7 @@ public class LearningHelper {
 
     private static final String TAG = "LearningHelper";
 
-    private static final String WORDS_FILENAME = "words.txt";
+    private static final String WORDS_FILENAME = "en_ru_common.txt";
     private static final String POSITION_WORDS = "position.txt";
     private static final int UNICODE_EMPTY_FILE_SIZE = 3;
 
@@ -182,3 +183,4 @@ public class LearningHelper {
         return new Word(components[0], components[1], components[2]);
     }
 }
+*/
