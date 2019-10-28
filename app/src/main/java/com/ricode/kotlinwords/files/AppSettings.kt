@@ -14,11 +14,12 @@ class AppSettings(context: Context) {
     fun getNumberOfWords() = appSettings().getInt(SP_SETTINGS_NUMBER_WORDS, 20)
 
     fun setNumberOfWords(num: Int) {
-        appSettings()
-            .edit()
-            .putInt(SP_SETTINGS_NUMBER_WORDS, 20)
-            .apply()
+        appSettings().edit().putInt(SP_SETTINGS_NUMBER_WORDS, num).apply()
     }
 
     fun getNumberOfTries() = appSettings().getInt(SP_SETTINGS_NUMBER_TRIES, 3)
+
+    fun setNumberOfTries(i: Int) {
+        appSettings().edit().putInt(SP_SETTINGS_NUMBER_TRIES, i).apply()
+    }
 }

@@ -36,4 +36,9 @@
     <string name="settings_swipemode_summary">Enable to use swipes instead of buttons </string>
     <string name="settings_tries">Number of tries</string>
     <string name="settings_tries_summary">Set the number of tries</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="button_shop">Shop</string>
+    <string name="button_statistics">Stats</string>
 </resources>

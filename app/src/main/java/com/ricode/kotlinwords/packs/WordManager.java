@@ -2,6 +2,7 @@ package com.ricode.kotlinwords.packs;
 
 import android.content.Context;
 import android.util.Log;
+import com.ricode.kotlinwords.files.AppSettings;
 import com.ricode.kotlinwords.utilities.ConstantsKt;
 
 import java.io.*;
@@ -11,12 +12,14 @@ import java.util.List;
 public class WordManager {
 
     private PackHelper mPackHelper;
+    private AppSettings mAppSettings;
 
     private static final String TAG = "WordManager";
 
     public WordManager(Context context) {
         Context mContext = context.getApplicationContext();
         mPackHelper = new PackHelper(mContext);
+        mAppSettings = new AppSettings(mContext);
     }
 
     private File getFile(PackNames filename) {
@@ -33,20 +36,18 @@ public class WordManager {
 
     private List<Word> getNWordsFromCurrentPosition(int n) {
         List<Word> words = new ArrayList<>();
-        int position = mPackHelper.getPackPosition();
+        int position = getWordsPosition();
         int counter = 1;
         String line;
         try(BufferedReader reader = new BufferedReader(new FileReader(getWordsFile()))){
             while ((line = reader.readLine()) != null) {
                 if ((counter - position) >= n) {
                     setWordsPosition(counter);
-                    //Log.i(TAG, "Position " + counter);
                     break;
                 }
                 if (counter >= position){
                     Word word = makeWord(line);
                     words.add(word);
-                    //Log.i(TAG, "Added word in N-list " + line);
                 }
                 counter++;
             }
@@ -130,7 +131,8 @@ public class WordManager {
     }
 
     private Word makeWord(String string) {
+        int tries = mAppSettings.getNumberOfTries();
         String[] components = string.split("\t");
-        return new Word(components[0], components[1], components[2]);
+        return new Word(components[0], components[1], components[2], tries);
     }
 }

@@ -5,6 +5,7 @@ import android.content.Context
 //Singleton repository
 class Repository private constructor(context: Context) {
     private val listComposer = ListComposer(context)
+    private val wordManager = WordManager(context)
 
     fun getLearnWords(): List<Word> {
         return listComposer.wordsFromLearn
