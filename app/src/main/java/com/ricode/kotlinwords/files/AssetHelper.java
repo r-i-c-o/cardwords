@@ -24,7 +24,6 @@ public class AssetHelper {
         String[] wordFiles;
         try {
             wordFiles = mAssetManager.list(WORDS_FOLDER);
-            Log.i("AssetH", "Assets " + wordFiles.length);
         } catch (IOException ioe) {
             wordFiles = null;
         }

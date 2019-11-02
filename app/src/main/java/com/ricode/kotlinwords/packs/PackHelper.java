@@ -37,7 +37,7 @@ public class PackHelper {
     }
 
     public void setPackPosition(int pos) {
-        mContext.getSharedPreferences(getCurrentPackName(), Context.MODE_PRIVATE)
+        mContext.getSharedPreferences(ConstantsKt.SP_PACK_PROPERTIES + "_" + getCurrentPackName(), Context.MODE_PRIVATE)
                 .edit().putInt(ConstantsKt.SP_PACK_POSITION, pos)
                 .apply();
     }
