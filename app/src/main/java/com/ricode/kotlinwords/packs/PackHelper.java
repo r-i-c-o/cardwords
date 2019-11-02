@@ -26,7 +26,9 @@ public class PackHelper {
     }
 
     public void setCurrentPackName(String name){
-        getAppSettings().edit().putString(ConstantsKt.SP_NAME_CURRENT_PACK, name).apply();
+        getAppSettings()
+                .edit().putString(ConstantsKt.SP_NAME_CURRENT_PACK, name)
+                .apply();
     }
 
     public int getPackPosition() {
@@ -46,7 +48,8 @@ public class PackHelper {
             String file = getCurrentPackName() + ".txt";
             return new File(dir, file);
         } else {
-            String filename = name.toString();
+            String filename = name.toString().toLowerCase() + ".txt";
+            Log.i("PackHelp", filename);
             return new File(dir, filename);
         }
     }

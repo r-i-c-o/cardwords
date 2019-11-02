@@ -26,10 +26,6 @@ public class WordManager {
         return mPackHelper.getPackFile(filename);
     }
 
-    private File getWordsFile() {
-        return mPackHelper.getPackFile(PackNames.PACK);
-    }
-
     private boolean isFileEmpty(File file) {
         return file.length() <= ConstantsKt.UNICODE_EMPTY;
     }
@@ -39,10 +35,11 @@ public class WordManager {
         int position = getWordsPosition();
         int counter = 1;
         String line;
-        try(BufferedReader reader = new BufferedReader(new FileReader(getWordsFile()))){
+        try(BufferedReader reader = new BufferedReader(new FileReader(getFile(PackNames.PACK)))){
             while ((line = reader.readLine()) != null) {
                 if ((counter - position) >= n) {
                     setWordsPosition(counter);
+                    Log.i(TAG, "position" + counter);
                     break;
                 }
                 if (counter >= position){
@@ -68,7 +65,7 @@ public class WordManager {
                         words.add(word);
                     }
                 }
-                //Log.i(TAG, "Added " + words.size() + " words");
+                //Log.i(TAG, "Added " + words.size() + " words from " + getFile(filename).toString());
             } catch (IOException ioe) {
                 Log.e(TAG, "Couldn't open " + filename + " file: " + ioe);
             }
@@ -78,12 +75,10 @@ public class WordManager {
 
     //TODO MOVE TO LISTCOMPOSER
     public List<Word> setupWords() {
-        List<Word> words;
-
         List<Word> current = getAllWordsFromFile(PackNames.LEARN);
         if (current.size() <= 20) {
             //adding words from words file
-            words = getNWordsFromCurrentPosition(20 - current.size());
+            List<Word> words = getNWordsFromCurrentPosition(20 - current.size());
             current.addAll(words);
         }
         rewriteWordsInFile(PackNames.LEARN, current);

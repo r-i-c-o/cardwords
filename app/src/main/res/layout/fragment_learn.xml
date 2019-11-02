@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/card_button_layout"
+    android:id="@+id/fragment_learn_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center">
@@ -19,7 +17,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/button_check"
+        app:layout_constraintBottom_toTopOf="@+id/button_reveal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -33,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@{vm.isListNotEmpty()? vm.getWord().title : `Nothing to learn`}"
+                android:text=""
                 android:textAlignment="center"
                 android:textSize="30sp"
                 android:textStyle="bold"
@@ -47,7 +45,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@{vm.isListNotEmpty()? vm.getWord().transcription : ``}"
+                android:text=""
+                android:visibility="invisible"
                 android:textAlignment="center"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toTopOf="@+id/text_translate"
@@ -61,7 +60,8 @@
                 android:gravity="center"
                 android:layout_height="0dp"
                 android:layout_marginTop="16dp"
-                android:text="@{vm.isListNotEmpty()? vm.getWord().translation : ``}"
+                android:text=""
+                android:visibility="invisible"
                 android:textAlignment="center"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -74,26 +74,25 @@
 
     <Button
         android:id="@+id/button_correct"
-        android:onClick="@{() -> vm.incIndex()}"
         android:text="@string/button_correct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="12sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/button_check"
-        app:layout_constraintEnd_toStartOf="@+id/button_check"
+        app:layout_constraintBaseline_toBaselineOf="@+id/button_reveal"
+        app:layout_constraintEnd_toStartOf="@+id/button_reveal"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="positive" />
 
     <Button
-        android:id="@+id/button_check"
+        android:id="@+id/button_reveal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
         android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/text_words_left"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button_incorrect"
         app:layout_constraintStart_toEndOf="@+id/button_correct"
         tools:text="show" />
@@ -104,23 +103,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="12sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/button_check"
+        app:layout_constraintBaseline_toBaselineOf="@+id/button_reveal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button_check"
+        app:layout_constraintStart_toEndOf="@+id/button_reveal"
         tools:text="negative" />
 
-    <TextView
-        android:id="@+id/text_words_left"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:text="@{`Words left: ` + vm.listSize}"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/button_check"
-        app:layout_constraintStart_toStartOf="@+id/button_check"
-        tools:text="Words left: int" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-

@@ -10,7 +10,12 @@
         android:name="com.ricode.kotlinwords.ui.StartFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_start">
-        <action android:id="@+id/action_startFragment_to_learnFragment" app:destination="@id/learnFragment"/>
+        <action
+            android:id="@+id/action_startFragment_to_learnFragment"
+            app:destination="@id/learnFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim" />
         <action android:id="@+id/action_startFragment_to_testFragment" app:destination="@id/testFragment"/>
         <action
             android:id="@+id/action_startFragment_to_settingsFragment"
