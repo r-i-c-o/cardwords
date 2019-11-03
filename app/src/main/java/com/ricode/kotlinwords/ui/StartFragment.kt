@@ -43,6 +43,7 @@ class StartFragment : Fragment() {
         button_settings.setOnClickListener { v ->
             v.findNavController().navigate(R.id.action_startFragment_to_settingsFragment)
         }
+
     }
 
     /*override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

@@ -76,7 +76,7 @@
         android:id="@+id/button_correct"
         android:text="@string/button_correct"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:textSize="12sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/button_reveal"
         app:layout_constraintEnd_toStartOf="@+id/button_reveal"
@@ -86,8 +86,8 @@
 
     <Button
         android:id="@+id/button_reveal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
@@ -101,7 +101,7 @@
         android:id="@+id/button_incorrect"
         android:text="@string/button_incorrect"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:textSize="12sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/button_reveal"
         app:layout_constraintEnd_toEndOf="parent"

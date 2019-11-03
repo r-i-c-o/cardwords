@@ -1,7 +1,9 @@
 package com.ricode.kotlinwords.presenter
 
+import com.ricode.kotlinwords.packs.Word
+
 interface IView {
-    fun setWord()
+    fun setWord(word: Word)
 
     fun showTranscription()
     fun showTranslation()

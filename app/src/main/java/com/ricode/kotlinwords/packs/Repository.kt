@@ -7,12 +7,16 @@ class Repository private constructor(context: Context) {
     private val listComposer = ListComposer(context)
     private val wordManager = WordManager(context)
 
-    fun getLearnWords(): List<Word> {
+    fun getLearnWords(): ArrayList<Word> {
         return listComposer.wordsFromLearn
     }
 
-    fun getTestWords(): List<Word> {
+    fun getTestWords(): ArrayList<Word> {
         return listComposer.wordsFromTest
+    }
+
+    fun removeWord() {
+        
     }
 
     companion object {

@@ -1,25 +1,23 @@
 package com.ricode.kotlinwords.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.ricode.kotlinwords.R
-import com.ricode.kotlinwords.packs.Repository
 import com.ricode.kotlinwords.packs.Word
 import com.ricode.kotlinwords.presenter.IView
+import com.ricode.kotlinwords.presenter.LearnPresenter
 import kotlinx.android.synthetic.main.fragment_learn.*
 
 class LearnFragment : Fragment(), IView{
 
-    private lateinit var wordList: ArrayList<Word>
-    private var index = 0
+    private lateinit var mPresenter: LearnPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        wordList = Repository.getInstance(requireContext()).getLearnWords() as ArrayList<Word>
+        mPresenter = LearnPresenter(this, requireContext())
     }
 
     override fun onCreateView(
@@ -30,50 +28,23 @@ class LearnFragment : Fragment(), IView{
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        if (wordList.isEmpty())
-            noSetup()
-        else setWord()
+        mPresenter.onStart()
 
         button_reveal.setOnClickListener {
-            showTranscription()
-            showTranslation()
-            hideRevealButton()
-            showGuessingButtons()
+            mPresenter.onRevealButtonClicked()
         }
         button_correct.setOnClickListener {
-            wordList[index].incTries()
-            wordList.remove(wordList[index])
-            if (wordList.isEmpty()) noSetup()
-            else showNextWord()
+            mPresenter.onPositiveButtonClicked()
         }
         button_incorrect.setOnClickListener {
-            showNextWord()
+            mPresenter.onNegativeButtonClicked()
         }
     }
 
-    private fun showNextWord() {
-        incIndex()
-        setWord()
-        hideGuessingButtons()
-        showRevealButton()
-        hideTranscription()
-        hideTranslation()
-    }
-
-    private fun incIndex() {
-        index = (index + 1) % wordList.size
-        Log.i("LearnFr", "size ${wordList.size}, index $index")
-    }
-
-    private fun noSetup() {
-        hideGuessingButtons()
-        hideRevealButton()
-    }
-
-    override fun setWord() {
-        text_word.text = wordList[index].title
-        text_transcribe.text = wordList[index].transcription
-        text_translate.text = wordList[index].translation
+    override fun setWord(word: Word) {
+        text_word.text = word.title
+        text_transcribe.text = word.transcription
+        text_translate.text = word.translation
     }
 
     override fun showTranscription() {

@@ -30,8 +30,9 @@ public class WordManager {
         return file.length() <= ConstantsKt.UNICODE_EMPTY;
     }
 
-    private List<Word> getNWordsFromCurrentPosition(int n) {
-        List<Word> words = new ArrayList<>();
+    //TODO split method
+    private ArrayList<Word> getNWordsFromCurrentPosition(int n) {
+        ArrayList<Word> words = new ArrayList<>();
         int position = getWordsPosition();
         int counter = 1;
         String line;
@@ -39,7 +40,6 @@ public class WordManager {
             while ((line = reader.readLine()) != null) {
                 if ((counter - position) >= n) {
                     setWordsPosition(counter);
-                    Log.i(TAG, "position" + counter);
                     break;
                 }
                 if (counter >= position){
@@ -54,8 +54,8 @@ public class WordManager {
         return words;
     }
 
-    public List<Word> getAllWordsFromFile(PackNames filename) {
-        List<Word> words = new ArrayList<>();
+    public ArrayList<Word> getAllWordsFromFile(PackNames filename) {
+        ArrayList<Word> words = new ArrayList<>();
         if (!isFileEmpty(getFile(filename))) {
             try (BufferedReader reader = new BufferedReader(new FileReader(getFile(filename)))) {
                 String line;
@@ -74,10 +74,9 @@ public class WordManager {
     }
 
     //TODO MOVE TO LISTCOMPOSER
-    public List<Word> setupWords() {
-        List<Word> current = getAllWordsFromFile(PackNames.LEARN);
-        if (current.size() <= 20) {
-            //adding words from words file
+    public ArrayList<Word> setupWords() {
+        ArrayList<Word> current = getAllWordsFromFile(PackNames.LEARN);
+        if (current.size() < 20) {
             List<Word> words = getNWordsFromCurrentPosition(20 - current.size());
             current.addAll(words);
         }
@@ -94,10 +93,8 @@ public class WordManager {
                     String tr = w.getTranslation();
                     String complete = title + "\t" + tb + "\t" + tr + "\n";
                     writer.write(complete);
-                    //Log.i(TAG, "Written to " + filename + " file string: " + complete);
                 }
             } else {
-                //Log.i(TAG, "List is empty");
                 writer.write("");
             }
         } catch (IOException ioe1) {
