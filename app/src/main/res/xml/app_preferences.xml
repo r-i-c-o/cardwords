@@ -21,7 +21,7 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory
+    <!--<PreferenceCategory
         android:title="@string/settings_category_appearance">
 
         <SwitchPreference
@@ -34,7 +34,7 @@
             android:title="@string/settings_swipemode"
             android:summary="@string/settings_swipemode_summary"/>
 
-    </PreferenceCategory>
+    </PreferenceCategory>-->
 
     <PreferenceCategory
         android:title="@string/settings_category_other" >

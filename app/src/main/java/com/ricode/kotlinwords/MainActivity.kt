@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.ricode.kotlinwords.files.AssetHelper
+import com.google.android.gms.ads.MobileAds
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.fragment)
         setupActionBarWithNavController(navController)
 
+        MobileAds.initialize(this) {}
     }
 
     override fun onSupportNavigateUp(): Boolean {

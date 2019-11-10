@@ -16,4 +16,7 @@ interface IView {
 
     fun showGuessingButtons()
     fun hideGuessingButtons()
+
+    fun showAd()
+    fun showDialog()
 }

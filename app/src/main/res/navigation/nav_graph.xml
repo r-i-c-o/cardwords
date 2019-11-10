@@ -13,10 +13,11 @@
         <action
             android:id="@+id/action_startFragment_to_learnFragment"
             app:destination="@id/learnFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim" />
-        <action android:id="@+id/action_startFragment_to_testFragment" app:destination="@id/testFragment"/>
+            app:enterAnim="@anim/nav_default_enter_anim" />
+        <action
+            android:id="@+id/action_startFragment_to_testFragment"
+            app:destination="@id/testFragment"
+            app:enterAnim="@anim/nav_default_enter_anim" />
         <action
             android:id="@+id/action_startFragment_to_settingsFragment"
             app:destination="@id/settingsFragment"
@@ -28,7 +29,19 @@
         android:id="@+id/learnFragment"
         android:name="com.ricode.kotlinwords.ui.LearnFragment"
         android:label="@string/learn_name"
-        tools:layout="@layout/fragment_learn"/>
+        tools:layout="@layout/fragment_learn">
+        <action
+            android:id="@+id/action_learnFragment_to_continue_dialog_fragment2"
+            app:destination="@id/continue_dialog_fragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/continue_dialog_fragment"
+        android:name="com.ricode.kotlinwords.ui.ContinueDialogFragment"
+        >
+        <action
+            android:id="@+id/from_continue_dialog"
+            app:destination="@id/learnFragment"/>
+    </dialog>
     <fragment
         android:id="@+id/testFragment"
         android:name="com.ricode.kotlinwords.ui.TestFragment"

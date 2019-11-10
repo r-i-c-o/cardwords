@@ -21,6 +21,10 @@ public class PackHelper {
         return mContext.getSharedPreferences(ConstantsKt.SP_APP_SETTINGS, Context.MODE_PRIVATE);
     }
 
+    private SharedPreferences getPackSettings() {
+        return mContext.getSharedPreferences(ConstantsKt.SP_PACK_PROPERTIES + "_" + getCurrentPackName(), Context.MODE_PRIVATE);
+    }
+
     public String getCurrentPackName(){
         return getAppSettings().getString(ConstantsKt.SP_NAME_CURRENT_PACK, "en_ru_common");
     }
@@ -32,12 +36,12 @@ public class PackHelper {
     }
 
     public int getPackPosition() {
-        return mContext.getSharedPreferences(ConstantsKt.SP_PACK_PROPERTIES + "_" + getCurrentPackName(), Context.MODE_PRIVATE)
+        return getPackSettings()
                 .getInt(ConstantsKt.SP_PACK_POSITION, 1);
     }
 
     public void setPackPosition(int pos) {
-        mContext.getSharedPreferences(ConstantsKt.SP_PACK_PROPERTIES + "_" + getCurrentPackName(), Context.MODE_PRIVATE)
+        getPackSettings()
                 .edit().putInt(ConstantsKt.SP_PACK_POSITION, pos)
                 .apply();
     }
@@ -52,6 +56,10 @@ public class PackHelper {
             Log.i("PackHelp", filename);
             return new File(dir, filename);
         }
+    }
+
+    public boolean isNeededToAddNewWords() {
+        return false;
     }
 
     public void createPackDirectory(String name){

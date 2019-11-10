@@ -17,6 +17,7 @@
 
         <Button
             android:id="@+id/button_learn"
+            style="@style/Widget.AppCompat.Button"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:text="@string/button_learn" />

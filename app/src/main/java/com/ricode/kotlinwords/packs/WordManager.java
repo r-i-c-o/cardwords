@@ -7,7 +7,7 @@ import com.ricode.kotlinwords.utilities.ConstantsKt;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class WordManager {
 
@@ -30,7 +30,7 @@ public class WordManager {
         return file.length() <= ConstantsKt.UNICODE_EMPTY;
     }
 
-    //TODO split method
+    //TODO split method, make async
     private ArrayList<Word> getNWordsFromCurrentPosition(int n) {
         ArrayList<Word> words = new ArrayList<>();
         int position = getWordsPosition();
@@ -77,14 +77,14 @@ public class WordManager {
     public ArrayList<Word> setupWords() {
         ArrayList<Word> current = getAllWordsFromFile(PackNames.LEARN);
         if (current.size() < 20) {
-            List<Word> words = getNWordsFromCurrentPosition(20 - current.size());
+            ArrayList<Word> words = getNWordsFromCurrentPosition(20 - current.size());
             current.addAll(words);
         }
         rewriteWordsInFile(PackNames.LEARN, current);
         return current;
     }
 
-    public void rewriteWordsInFile(PackNames filename, List<Word> words) {
+    public void rewriteWordsInFile(PackNames filename, ArrayList<Word> words) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(getFile(filename)))) {
             if (!words.isEmpty()){
                 for (Word w : words) {

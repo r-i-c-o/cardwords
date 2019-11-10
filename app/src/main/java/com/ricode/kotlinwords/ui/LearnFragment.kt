@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
 import com.ricode.kotlinwords.R
 import com.ricode.kotlinwords.packs.Word
 import com.ricode.kotlinwords.presenter.IView
@@ -14,6 +17,7 @@ import kotlinx.android.synthetic.main.fragment_learn.*
 class LearnFragment : Fragment(), IView{
 
     private lateinit var mPresenter: LearnPresenter
+    private lateinit var mAd: InterstitialAd
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +32,7 @@ class LearnFragment : Fragment(), IView{
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        mPresenter.onStart()
+        mPresenter.startWords()
 
         button_reveal.setOnClickListener {
             mPresenter.onRevealButtonClicked()
@@ -39,6 +43,18 @@ class LearnFragment : Fragment(), IView{
         button_incorrect.setOnClickListener {
             mPresenter.onNegativeButtonClicked()
         }
+
+        loadAd()
+    }
+
+    private fun loadAd() {
+        mAd = InterstitialAd(activity)
+        mAd.adUnitId = "ca-app-pub-3940256099942544/1033173712"
+        mAd.loadAd(AdRequest.Builder().build())
+    }
+
+    override fun showDialog() {
+        findNavController().navigate(R.id.action_learnFragment_to_continue_dialog_fragment2)
     }
 
     override fun setWord(word: Word) {
@@ -65,6 +81,10 @@ class LearnFragment : Fragment(), IView{
 
     override fun hideTranscription() {
         text_transcribe.visibility = View.INVISIBLE
+    }
+
+    override fun showAd() {
+        if (mAd.isLoaded) mAd.show()
     }
 
     override fun hideTranslation() {
