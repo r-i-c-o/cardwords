@@ -22,53 +22,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:id="@+id/fragment_learn_frame"/>
 
-            <TextView
-                android:id="@+id/text_word"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text=""
-                android:textAlignment="center"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/text_transcribe"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteX="206dp"
-                tools:text="word" />
-
-            <TextView
-                android:id="@+id/text_transcribe"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text=""
-                android:visibility="invisible"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toTopOf="@+id/text_translate"
-                app:layout_constraintTop_toBottomOf="@+id/text_word"
-                tools:layout_editor_absoluteX="0dp"
-                tools:text="translation" />
-
-            <TextView
-                android:id="@+id/text_translate"
-                android:layout_width="match_parent"
-                android:gravity="center"
-                android:layout_height="0dp"
-                android:layout_marginTop="16dp"
-                android:text=""
-                android:visibility="invisible"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_transcribe"
-                tools:layout_editor_absoluteX="0dp"
-                tools:text="transcription transcription transcription" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
 

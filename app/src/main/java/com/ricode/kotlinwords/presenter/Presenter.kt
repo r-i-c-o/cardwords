@@ -12,8 +12,8 @@ abstract class Presenter(private val mView: IView) : IPresenter {
         if (mWordList.isEmpty()) {
             mView.hideGuessingButtons()
             mView.hideRevealButton()
-            //mView.showAd()
-            mView.showDialog()
+            mView.showAd()
+            //mView.showDialog()
         } else {
             incIndex()
             mView.setWord(mWordList[mIndex])
@@ -31,6 +31,7 @@ abstract class Presenter(private val mView: IView) : IPresenter {
     }
 
     override fun startWords() {
+        mView.setCardView()
         mView.setWord(mWordList[mIndex])
     }
 

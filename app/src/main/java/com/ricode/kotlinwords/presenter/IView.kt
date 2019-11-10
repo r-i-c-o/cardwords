@@ -1,5 +1,7 @@
 package com.ricode.kotlinwords.presenter
 
+import com.google.android.gms.ads.formats.UnifiedNativeAd
+import com.google.android.gms.ads.formats.UnifiedNativeAdView
 import com.ricode.kotlinwords.packs.Word
 
 interface IView {
@@ -16,6 +18,9 @@ interface IView {
 
     fun showGuessingButtons()
     fun hideGuessingButtons()
+
+    fun setCardView()
+    fun populateNativeAd(ad: UnifiedNativeAd, view: UnifiedNativeAdView)
 
     fun showAd()
     fun showDialog()
