@@ -10,10 +10,8 @@ abstract class Presenter(private val mView: IView) : IPresenter {
 
     override fun checkEmpty() {
         if (mWordList.isEmpty()) {
-            mView.hideGuessingButtons()
-            mView.hideRevealButton()
             mView.showAd()
-            //mView.showDialog()
+
         } else {
             incIndex()
             mView.setWord(mWordList[mIndex])

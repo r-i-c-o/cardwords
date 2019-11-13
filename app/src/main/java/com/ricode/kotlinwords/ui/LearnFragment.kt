@@ -27,7 +27,6 @@ class LearnFragment : Fragment(), IView{
 
     private lateinit var mPresenter: LearnPresenter
     private var mAd: UnifiedNativeAd? = null
-    private lateinit var cardView: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +38,11 @@ class LearnFragment : Fragment(), IView{
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_learn, container, false)
+    }
+
+    override fun onDestroy() {
+        mAd?.destroy()
+        super.onDestroy()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -57,12 +61,8 @@ class LearnFragment : Fragment(), IView{
     }
 
     override fun populateNativeAd(ad: UnifiedNativeAd, view: UnifiedNativeAdView) {
-        mAd?.destroy()
-        mAd = ad
-        // Set the media view.
         view.mediaView = view.findViewById(R.id.ad_media)
 
-        // Set other ad assets.
         view.headlineView = view.findViewById(R.id.ad_headline)
         view.bodyView = view.findViewById(R.id.ad_body)
         view.callToActionView = view.findViewById(R.id.ad_call_to_action)
@@ -72,12 +72,9 @@ class LearnFragment : Fragment(), IView{
         view.storeView = view.findViewById(R.id.ad_store)
         view.advertiserView = view.findViewById(R.id.ad_advertiser)
 
-        // The headline and media content are guaranteed to be in every UnifiedNativeAd.
         (view.headlineView as TextView).text = ad.headline
         view.mediaView.setMediaContent(ad.mediaContent)
 
-        // These assets aren't guaranteed to be in every UnifiedNativeAd, so it's important to
-        // check before trying to display them.
         if (ad.body == null) {
             view.bodyView.visibility = View.INVISIBLE
         } else {
@@ -134,10 +131,7 @@ class LearnFragment : Fragment(), IView{
     private fun loadAd() {
         val adloader = AdLoader.Builder(activity, "ca-app-pub-3940256099942544/2247696110")
             .forUnifiedNativeAd {
-                val adView = LayoutInflater.from(activity).inflate(R.layout.ad_unified, null) as UnifiedNativeAdView
-                populateNativeAd(it, adView)
-                fragment_learn_frame.removeAllViews()
-                fragment_learn_frame.addView(adView)
+                mAd = it
             }.withAdListener(object : AdListener() {
                 override fun onAdFailedToLoad(p0: Int) {
                     Log.i("LearnFr", "ad loading failed")
@@ -147,8 +141,11 @@ class LearnFragment : Fragment(), IView{
     }
 
     override fun setCardView() {
-        cardView = LayoutInflater.from(activity).inflate(R.layout.card_frame, null)
+        val cardView = LayoutInflater.from(activity).inflate(R.layout.card_frame, fragment_learn_frame, false)
+        fragment_learn_frame.removeAllViews()
         fragment_learn_frame.addView(cardView)
+        Log.i("LearnFr", "${cardView.height}")
+        loadAd()
     }
 
     override fun showDialog() {
@@ -182,7 +179,10 @@ class LearnFragment : Fragment(), IView{
     }
 
     override fun showAd() {
-        loadAd()
+        val adView = LayoutInflater.from(activity).inflate(R.layout.ad_unified, null) as UnifiedNativeAdView
+        populateNativeAd(mAd!!, adView)
+        fragment_learn_frame.removeAllViews()
+        fragment_learn_frame.addView(adView)
     }
 
     override fun hideTranslation() {
