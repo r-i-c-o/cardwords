@@ -20,6 +20,7 @@ import com.ricode.kotlinwords.R
 import com.ricode.kotlinwords.packs.Word
 import com.ricode.kotlinwords.presenter.IView
 import com.ricode.kotlinwords.presenter.LearnPresenter
+import com.ricode.kotlinwords.utilities.AD_ID
 import kotlinx.android.synthetic.main.card_frame.*
 import kotlinx.android.synthetic.main.fragment_learn.*
 
@@ -27,6 +28,7 @@ class LearnFragment : Fragment(), IView{
 
     private lateinit var mPresenter: LearnPresenter
     private var mAd: UnifiedNativeAd? = null
+    private var isAdLoaded = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +48,7 @@ class LearnFragment : Fragment(), IView{
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        mPresenter.startWords()
+        mPresenter.startSession()
 
         button_reveal.setOnClickListener {
             mPresenter.onRevealButtonClicked()
@@ -58,6 +60,7 @@ class LearnFragment : Fragment(), IView{
             mPresenter.onNegativeButtonClicked()
         }
 
+        loadAd()
     }
 
     override fun populateNativeAd(ad: UnifiedNativeAd, view: UnifiedNativeAdView) {
@@ -129,10 +132,13 @@ class LearnFragment : Fragment(), IView{
     }
 
     private fun loadAd() {
-        val adloader = AdLoader.Builder(activity, "ca-app-pub-3940256099942544/2247696110")
+        val adloader = AdLoader.Builder(activity, AD_ID)
             .forUnifiedNativeAd {
                 mAd = it
             }.withAdListener(object : AdListener() {
+                override fun onAdLoaded() {
+                    isAdLoaded = true
+                }
                 override fun onAdFailedToLoad(p0: Int) {
                     Log.i("LearnFr", "ad loading failed")
                 }
@@ -144,8 +150,6 @@ class LearnFragment : Fragment(), IView{
         val cardView = LayoutInflater.from(activity).inflate(R.layout.card_frame, fragment_learn_frame, false)
         fragment_learn_frame.removeAllViews()
         fragment_learn_frame.addView(cardView)
-        Log.i("LearnFr", "${cardView.height}")
-        loadAd()
     }
 
     override fun showDialog() {
@@ -178,11 +182,19 @@ class LearnFragment : Fragment(), IView{
         text_transcribe.visibility = View.INVISIBLE
     }
 
+    override fun isAdLoaded(): Boolean {
+        return isAdLoaded
+    }
+
     override fun showAd() {
-        val adView = LayoutInflater.from(activity).inflate(R.layout.ad_unified, null) as UnifiedNativeAdView
+        val adView = LayoutInflater.from(activity).inflate(R.layout.ad_unified, fragment_learn_frame, false) as UnifiedNativeAdView
         populateNativeAd(mAd!!, adView)
         fragment_learn_frame.removeAllViews()
         fragment_learn_frame.addView(adView)
+    }
+
+    override fun hideAd() {
+        mAd?.destroy()
     }
 
     override fun hideTranslation() {

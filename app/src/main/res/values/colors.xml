@@ -5,4 +5,7 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="greenPrimary">#76FF03</color>
+    <color name="redGradient">#FF0000</color>
+    <color name="blueGradient">#0000FF</color>
+    <color name="fillWhite">#FFFFFF</color>
 </resources>
