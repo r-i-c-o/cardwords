@@ -34,9 +34,10 @@
     <Button
         android:id="@+id/button_correct"
         android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/positive_button_style"
         android:text="@string/button_correct"
         android:textSize="12sp"
         android:visibility="invisible"
@@ -61,10 +62,11 @@
 
     <Button
         android:id="@+id/button_incorrect"
+        android:background="@drawable/negative_button_style"
         android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
         android:text="@string/button_incorrect"
         android:textSize="12sp"
         android:visibility="invisible"
