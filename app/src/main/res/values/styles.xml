@@ -1,16 +1,39 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.Design.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="android:textColor">@color/textBlack</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
         <item name="android:fontFamily">@font/open_sans</item>
     </style>
 
+    <style name="AppThemeDark" parent="AppTheme">
+        <item name="colorPrimary">@color/fillBlack</item>
+        <item name="android:textColor">@color/textWhite</item>
+        <item name="android:windowBackground">@color/fillBlack</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+    </style>
 
+    <style name="ButtonBlueRedGradientStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_blue_red_style</item>
+        <item name="android:textColor">@color/button_text_color</item>
+
+    </style>
+
+    <style name="ButtonBluePurpleGradientStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_blue_purple_style</item>
+        <item name="android:textColor">@color/button_text_color</item>
+    </style>
+
+    <style name="ButtonPurpleRedGradientStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_purple_red_style</item>
+        <item name="android:textColor">@color/button_text_color</item>
+    </style>
 
 </resources>

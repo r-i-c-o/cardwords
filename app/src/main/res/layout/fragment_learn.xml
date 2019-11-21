@@ -14,11 +14,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:elevation="5dp"
         android:translationZ="10dp"
         app:cardCornerRadius="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/button_reveal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -32,12 +31,12 @@
 
 
     <Button
+        style="@style/ButtonBluePurpleGradientStyle"
         android:id="@+id/button_correct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginBottom="24dp"
-        android:background="@drawable/positive_button_style"
         android:text="@string/button_correct"
         android:textSize="12sp"
         android:visibility="invisible"
@@ -47,22 +46,22 @@
         tools:text="positive" />
 
     <Button
+        style="@style/ButtonBlueRedGradientStyle"
         android:id="@+id/button_reveal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
-        android:background="@drawable/reveal_button_style"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="show" />
+        android:text="@string/button_show"/>
 
     <Button
+        style="@style/ButtonPurpleRedGradientStyle"
         android:id="@+id/button_incorrect"
-        android:background="@drawable/negative_button_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
