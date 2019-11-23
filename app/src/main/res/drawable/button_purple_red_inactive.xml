@@ -20,7 +20,7 @@
             <corners
                 android:radius="1000dp"/>
             <solid
-                android:color="@color/fillWhite"/>
+                android:color="?attr/colorPrimary"/>
         </shape>
     </item>
 </layer-list>

@@ -14,9 +14,11 @@
     </style>
 
     <style name="AppThemeDark" parent="AppTheme">
-        <item name="colorPrimary">@color/fillBlack</item>
+        <item name="colorPrimary">@color/colorPrimaryNight</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkNight</item>
         <item name="android:textColor">@color/textWhite</item>
-        <item name="android:windowBackground">@color/fillBlack</item>
+        <item name="android:textColorSecondary">@color/textSecondaryWhite</item>
+        <item name="android:windowBackground">@color/colorBackgroundNight</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
     </style>
 

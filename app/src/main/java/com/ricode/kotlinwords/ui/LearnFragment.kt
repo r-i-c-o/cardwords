@@ -33,6 +33,7 @@ class LearnFragment : Fragment(), IView{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mPresenter = LearnPresenter(this, requireContext())
+
     }
 
     override fun onCreateView(
@@ -58,6 +59,9 @@ class LearnFragment : Fragment(), IView{
         }
         button_incorrect.setOnClickListener {
             mPresenter.onNegativeButtonClicked()
+        }
+        button_back.setOnClickListener {
+            findNavController().navigateUp()
         }
 
         loadAd()

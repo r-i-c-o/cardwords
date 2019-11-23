@@ -4,12 +4,17 @@
     <color name="colorPrimaryDark">#FAFAFA</color>
     <color name="colorAccent">#D81B60</color>
 
+    <color name="colorPrimaryNight">#333333</color>
+    <color name="colorPrimaryDarkNight">#000000</color>
+    <color name="colorBackgroundNight">#222222</color>
+
     <color name="redGradient">#FF0000</color>
     <color name="blueGradient">#0000FF</color>
-    <color name="middleGradient">#880088</color>
+    <color name="middleGradient">#800080</color>
 
     <color name="textBlack">#000000</color>
     <color name="textWhite">#FFFFFF</color>
+    <color name="textSecondaryWhite">#FAFAFA</color>
 
     <color name="fillWhite">#FFFFFF</color>
     <color name="fillBlack">#333333</color>
