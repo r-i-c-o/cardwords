@@ -1,5 +1,7 @@
 package com.ricode.kotlinwords.ui
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,29 +13,28 @@ import android.widget.RatingBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdLoader
-import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.formats.UnifiedNativeAd
 import com.google.android.gms.ads.formats.UnifiedNativeAdView
 import com.ricode.kotlinwords.R
 import com.ricode.kotlinwords.packs.Word
 import com.ricode.kotlinwords.presenter.IView
 import com.ricode.kotlinwords.presenter.LearnPresenter
-import com.ricode.kotlinwords.utilities.AD_ID
 import kotlinx.android.synthetic.main.card_frame.*
 import kotlinx.android.synthetic.main.fragment_learn.*
+
+private const val REQUEST_CONTINUE = 1
 
 class LearnFragment : Fragment(), IView{
 
     private lateinit var mPresenter: LearnPresenter
-    private var mAd: UnifiedNativeAd? = null
-    private var isAdLoaded = false
+
+    private lateinit var textWord: TextView
+    private lateinit var textTranscription: TextView
+    private lateinit var textTranslation: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mPresenter = LearnPresenter(this, requireContext())
-
     }
 
     override fun onCreateView(
@@ -44,8 +45,8 @@ class LearnFragment : Fragment(), IView{
     }
 
     override fun onDestroy() {
-        mAd?.destroy()
         super.onDestroy()
+        mPresenter.onDestroy()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -60,14 +61,25 @@ class LearnFragment : Fragment(), IView{
         button_incorrect.setOnClickListener {
             mPresenter.onNegativeButtonClicked()
         }
+        button_hide_ad.setOnClickListener {
+            mPresenter.onHideAdButtonClicked()
+        }
         button_back.setOnClickListener {
             findNavController().navigateUp()
         }
-
-        loadAd()
     }
 
-    override fun populateNativeAd(ad: UnifiedNativeAd, view: UnifiedNativeAdView) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        Log.i("LEFR", resultCode.toString())
+        if (requestCode == REQUEST_CONTINUE) {
+            when (resultCode) {
+                Activity.RESULT_OK -> mPresenter.startSession()
+                Activity.RESULT_CANCELED -> findNavController().navigateUp()
+            }
+        }
+    }
+
+    private fun populateNativeAd(ad: UnifiedNativeAd, view: UnifiedNativeAdView) {
         view.mediaView = view.findViewById(R.id.ad_media)
 
         view.headlineView = view.findViewById(R.id.ad_headline)
@@ -132,46 +144,40 @@ class LearnFragment : Fragment(), IView{
             view.advertiserView.visibility = View.VISIBLE
         }
         view.setNativeAd(ad)
-
     }
 
-    private fun loadAd() {
-        val adloader = AdLoader.Builder(activity, AD_ID)
-            .forUnifiedNativeAd {
-                mAd = it
-            }.withAdListener(object : AdListener() {
-                override fun onAdLoaded() {
-                    isAdLoaded = true
-                }
-                override fun onAdFailedToLoad(p0: Int) {
-                    Log.i("LearnFr", "ad loading failed")
-                }
-            }).build()
-        adloader.loadAd(AdRequest.Builder().build())
-    }
-
-    override fun setCardView() {
+    override fun setWordsCard() {
         val cardView = LayoutInflater.from(activity).inflate(R.layout.card_frame, fragment_learn_frame, false)
-        fragment_learn_frame.removeAllViews()
+        textWord = cardView.findViewById(R.id.text_word)
+        textTranscription = cardView.findViewById(R.id.text_transcribe)
+        textTranslation = cardView.findViewById(R.id.text_translate)
         fragment_learn_frame.addView(cardView)
     }
 
+    override fun hideCard() {
+        fragment_learn_frame.removeAllViews()
+    }
+
     override fun showDialog() {
-        findNavController().navigate(R.id.action_learnFragment_to_continue_dialog_fragment2)
+        val dialogFragment = ContinueDialogFragment()
+        dialogFragment.setTargetFragment(this, REQUEST_CONTINUE)
+        val fm = fragmentManager
+        if (fm != null) dialogFragment.show(fm, "TAG")
     }
 
     override fun setWord(word: Word) {
-        text_word.text = word.title
-        text_transcribe.text = word.transcription
-        text_translate.text = word.translation
+        textWord.text = word.title
+        textTranscription.text = word.transcription
+        textTranslation.text = word.translation
+        Log.i("LeFr", text_word.toString())
     }
 
     override fun showTranscription() {
-        text_transcribe.visibility = View.VISIBLE
+        textTranscription.visibility = View.VISIBLE
     }
 
     override fun showTranslation() {
-        text_translate.visibility = View.VISIBLE
+        textTranslation.visibility = View.VISIBLE
     }
 
     override fun showRevealButton() {
@@ -183,26 +189,26 @@ class LearnFragment : Fragment(), IView{
     }
 
     override fun hideTranscription() {
-        text_transcribe.visibility = View.INVISIBLE
+        textTranscription.visibility = View.INVISIBLE
     }
 
-    override fun isAdLoaded(): Boolean {
-        return isAdLoaded
-    }
-
-    override fun showAd() {
+    override fun showAd(ad: UnifiedNativeAd) {
+        ad_card_text.visibility = View.VISIBLE
+        button_hide_ad.visibility = View.VISIBLE
         val adView = LayoutInflater.from(activity).inflate(R.layout.ad_unified, fragment_learn_frame, false) as UnifiedNativeAdView
-        populateNativeAd(mAd!!, adView)
+        populateNativeAd(ad, adView)
         fragment_learn_frame.removeAllViews()
         fragment_learn_frame.addView(adView)
     }
 
     override fun hideAd() {
-        mAd?.destroy()
+        ad_card_text.visibility = View.GONE
+        button_hide_ad.visibility = View.GONE
+        fragment_learn_frame.removeAllViews()
     }
 
     override fun hideTranslation() {
-        text_translate.visibility = View.INVISIBLE
+        textTranslation.visibility = View.INVISIBLE
     }
 
     override fun showGuessingButtons() {

@@ -5,22 +5,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_learn_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center">
+    android:layout_height="match_parent">
 
 
     <FrameLayout
-        android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Button
+        <ImageView
             android:id="@+id/button_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="back" />
+            android:layout_margin="16dp"
+            app:srcCompat="?attr/actionModeCloseDrawable"
+            android:contentDescription="Back" />
     </FrameLayout>
+
+    <TextView
+        android:id="@+id/ad_card_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="@string/ad_title"
+        android:textAlignment="center"
+        android:textSize="22sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/card_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
         app:cardBackgroundColor="?attr/colorPrimary"
@@ -28,7 +42,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:elevation="5dp"
         android:translationZ="10dp"
         app:cardCornerRadius="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -42,8 +55,6 @@
             android:layout_height="match_parent" />
 
     </androidx.cardview.widget.CardView>
-
-
 
     <Button
         style="@style/ButtonBluePurpleGradientStyle"
@@ -87,5 +98,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="negative" />
+
+    <Button
+        style="@style/ButtonBlueRedGradientStyle"
+        android:visibility="gone"
+        android:id="@+id/button_hide_ad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/button_skip_ad"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

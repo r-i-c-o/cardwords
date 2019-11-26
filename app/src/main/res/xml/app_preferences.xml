@@ -1,25 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory
-        android:title="Learn">
+    <Preference
+        android:key="key_words_number"
+        android:title="@string/settings_number_of_words"
+        android:summary="@string/settings_number_of_words_summary"/>
 
-        <Preference
-            android:key="key_words_number"
-            android:title="@string/settings_number_of_words"
-            android:summary="@string/settings_number_of_words_summary"/>
+    <Preference
+        android:key="key_tries_number"
+        android:title="@string/settings_tries"
+        android:summary="@string/settings_tries_summary"/>
 
-        <Preference
-            android:key="key_tries_number"
-            android:title="@string/settings_tries"
-            android:summary="@string/settings_tries_summary"/>
-
-        <Preference
-            android:key="key_reset"
-            android:title="@string/settings_reset"
-            android:summary="@string/settings_reset_summary" />
-
-    </PreferenceCategory>
+    <Preference
+        android:key="key_reset"
+        android:title="@string/settings_reset"
+        android:summary="@string/settings_reset_summary" />
 
     <!--<PreferenceCategory
         android:title="@string/settings_category_appearance">

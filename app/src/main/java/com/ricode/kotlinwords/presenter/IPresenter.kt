@@ -2,11 +2,15 @@ package com.ricode.kotlinwords.presenter
 
 interface IPresenter {
 
-    fun startWords()
+    fun startSession()
 
     fun onPositiveButtonClicked()
     fun onNegativeButtonClicked()
     fun onRevealButtonClicked()
 
-    fun checkEmpty()
+    fun onHideAdButtonClicked()
+
+    fun onEndSession()
+
+    fun onDestroy()
 }
