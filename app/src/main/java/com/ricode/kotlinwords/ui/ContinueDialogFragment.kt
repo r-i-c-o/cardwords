@@ -1,9 +1,11 @@
 package com.ricode.kotlinwords.ui
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
+import android.view.KeyEvent
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
@@ -11,6 +13,7 @@ import com.ricode.kotlinwords.R
 
 class ContinueDialogFragment: DialogFragment(){
 
+    @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(requireActivity())
         val inflater = activity?.layoutInflater
@@ -30,13 +33,14 @@ class ContinueDialogFragment: DialogFragment(){
         builder.setView(v)
         val dialog = builder.create()
         dialog.setCanceledOnTouchOutside(false)
+        dialog.setOnKeyListener {_, keyCode, _ ->
+            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                targetFragment?.onActivityResult(targetRequestCode, Activity.RESULT_CANCELED, null)
+                dismiss()
+            }
+            true
+        }
         return dialog
     }
 
-    /*override fun onClick(v: View?) {
-        when(v?.id) {
-            R.id.continue_dialog_positive -> targetFragment?.onActivityResult(targetRequestCode, Activity.RESULT_OK, null)
-            R.id.continue_dialog_negative -> targetFragment?.onActivityResult(targetRequestCode, Activity.RESULT_CANCELED, null)
-        }
-    }*/
 }
