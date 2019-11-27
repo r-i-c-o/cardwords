@@ -31,4 +31,6 @@
     <string name="button_skip_ad">Пропустить объявление</string>
     <string name="ad_title">И карточка с рекламой. Для поддержки приложения</string>
     <string name="continue_dialog_text">Ты выучил %d слов. Молодец! Изучим ещё?</string>
+    <string name="continue_dialog_negative">Нет</string>
+    <string name="continue_dialog_positive">Да!</string>
 </resources>

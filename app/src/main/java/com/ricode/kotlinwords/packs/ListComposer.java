@@ -22,7 +22,9 @@ public class ListComposer {
     }
 
     private ArrayList<Word> makeLearnList() {
-        /*if repeat file contains @number_of_words or more, then
+        /*if learn file contains any word, return learn file
+        otherwise
+        if repeat file contains @number_of_words or more, then
         return list with @number_of_words
         * if repeat file contains less than @number_of_words, then add from pack file*/
 

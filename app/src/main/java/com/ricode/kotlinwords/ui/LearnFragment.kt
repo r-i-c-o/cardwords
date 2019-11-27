@@ -19,7 +19,6 @@ import com.ricode.kotlinwords.R
 import com.ricode.kotlinwords.packs.Word
 import com.ricode.kotlinwords.presenter.IView
 import com.ricode.kotlinwords.presenter.LearnPresenter
-import kotlinx.android.synthetic.main.card_frame.*
 import kotlinx.android.synthetic.main.fragment_learn.*
 
 private const val REQUEST_CONTINUE = 1
@@ -169,7 +168,6 @@ class LearnFragment : Fragment(), IView{
         textWord.text = word.title
         textTranscription.text = word.transcription
         textTranslation.text = word.translation
-        Log.i("LeFr", text_word.toString())
     }
 
     override fun showTranscription() {

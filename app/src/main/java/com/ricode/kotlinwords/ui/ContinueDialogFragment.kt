@@ -40,6 +40,8 @@ class ContinueDialogFragment: DialogFragment(){
             }
             true
         }
+        //dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
         return dialog
     }
 

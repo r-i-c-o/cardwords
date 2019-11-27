@@ -1,7 +1,6 @@
 package com.ricode.kotlinwords.presenter
 
 import android.content.Context
-import android.util.Log
 import com.ricode.kotlinwords.packs.Repository
 import com.ricode.kotlinwords.packs.Word
 import com.ricode.kotlinwords.services.AdsService
@@ -45,7 +44,6 @@ abstract class Presenter(
 
     override fun startSession() {
         mWordList = getList()
-        Log.i("Presentr", mWordList[4].title)
         mView.setWordsCard()
         setCurrentWord()
         adService.loadAd()

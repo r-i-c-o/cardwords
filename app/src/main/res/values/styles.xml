@@ -38,4 +38,12 @@
         <item name="android:textColor">@color/button_text_color</item>
     </style>
 
+    <style name="DialogButtonPositive" parent="ButtonBluePurpleGradientStyle">
+        <item name="android:background">@drawable/button_dialog_positive_style</item>
+    </style>
+
+    <style name="DialogButtonNegative" parent="ButtonPurpleRedGradientStyle">
+        <item name="android:background">@drawable/button_dialog_negative_style</item>
+    </style>
+
 </resources>

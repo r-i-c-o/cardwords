@@ -18,6 +18,8 @@
     <string name="ad_title">And card with ad, to support the app</string>
     <string name="button_skip_ad">Skip ad</string>
     <string name="continue_dialog_text">You\'ve learned %d words. Great job! Continue learning?</string>
+    <string name="continue_dialog_positive">Yes!</string>
+    <string name="continue_dialog_negative">No</string>
     <!--Settings section-->
     <string name="menu_settings">Settings</string>
     <string name="settings_reset">Reset</string>
