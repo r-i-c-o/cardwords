@@ -11,8 +11,7 @@
         </shape>
     </item>
     <item
-        android:bottom="2dp"
-        android:left="2dp"
+
         android:right="1dp">
         <shape
             android:shape="rectangle">
