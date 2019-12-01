@@ -73,16 +73,6 @@ public class WordManager {
         return words;
     }
 
-    /*public ArrayList<Word> setupWords() {
-        ArrayList<Word> current = getAllWordsFromFile(PackNames.LEARN);
-        if (current.size() < 20) {
-            ArrayList<Word> words = getNWordsFromCurrentPosition(20 - current.size());
-            current.addAll(words);
-        }
-        rewriteWordsInFile(PackNames.LEARN, current);
-        return current;
-    }*/
-
     public void rewriteWordsInFile(PackNames filename, List<Word> words) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(getFile(filename)))) {
             if (!words.isEmpty()){

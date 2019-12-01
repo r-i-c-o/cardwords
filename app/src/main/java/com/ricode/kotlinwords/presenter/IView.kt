@@ -22,9 +22,8 @@ interface IView {
     fun setWordsCard()
     fun hideCard()
 
-    //fun isAdLoaded(): Boolean
     fun showAd(ad: UnifiedNativeAd)
     fun hideAd()
 
-    fun showDialog()
+    fun endSession()
 }

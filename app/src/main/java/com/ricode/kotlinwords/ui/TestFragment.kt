@@ -1,24 +1,18 @@
 package com.ricode.kotlinwords.ui
 
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import com.ricode.kotlinwords.R
+import com.ricode.kotlinwords.presenter.IPresenter
 import com.ricode.kotlinwords.presenter.TestPresenter
 
+// TODO come up with endSession
+class TestFragment : LearnBaseFragment() {
 
-class TestFragment : Fragment() {
+    override fun setPresenter(): IPresenter {
+        return TestPresenter(this, requireContext())
+    }
 
-    private lateinit var mPresenter: TestPresenter
+    override fun endSession() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_test, container, false)
     }
 
 

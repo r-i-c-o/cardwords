@@ -7,9 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.ricode.kotlinwords.R
-import com.ricode.kotlinwords.files.AppSettings
 import com.ricode.kotlinwords.files.AssetHelper
-import com.ricode.kotlinwords.packs.PackHelper
 import kotlinx.android.synthetic.main.fragment_start.*
 
 

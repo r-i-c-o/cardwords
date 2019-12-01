@@ -13,7 +13,7 @@ import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import com.ricode.kotlinwords.R
 
-class ContinueDialogFragment: DialogFragment(){
+class ContinueDialogFragment: DialogFragment() {
 
     @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
