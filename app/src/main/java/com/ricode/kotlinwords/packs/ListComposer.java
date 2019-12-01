@@ -1,20 +1,25 @@
 package com.ricode.kotlinwords.packs;
 
 import android.content.Context;
+import android.util.Log;
+
+import com.ricode.kotlinwords.files.AppSettings;
 
 import java.util.ArrayList;
 
 public class ListComposer {
 
+    private int _numOfWords;
     private WordManager mManager;
 
     public ListComposer(Context context) {
         Context mContext = context.getApplicationContext();
         mManager = new WordManager(mContext);
+        _numOfWords = new AppSettings(mContext).getNumberOfWords();
     }
 
     public ArrayList<Word> getWordsFromLearn() {
-        return mManager.setupWords();
+        return makeLearnList();
     }
 
     public ArrayList<Word> getWordsFromTest() {
@@ -22,13 +27,30 @@ public class ListComposer {
     }
 
     private ArrayList<Word> makeLearnList() {
-        /*if learn file contains any word, return learn file
-        otherwise
-        if repeat file contains @number_of_words or more, then
-        return list with @number_of_words
-        * if repeat file contains less than @number_of_words, then add from pack file*/
-
-        return new ArrayList();
+        ArrayList<Word> list = mManager.getAllWordsFromFile(PackNames.LEARN);
+        Log.i("ListComposer", "learn contains " + list.size());
+        if (list.isEmpty()) {
+            ArrayList<Word> repeatList = mManager.getAllWordsFromFile(PackNames.REPEAT);
+            Log.i("ListComposer", "repeat contains " + repeatList.size());
+            if (repeatList.size() < _numOfWords) {
+                //add words from pack file
+                ArrayList<Word> learnList = mManager.getNWordsFromCurrentPosition(_numOfWords - repeatList.size());
+                Log.i("ListComposer", "added from pack " + learnList.size());
+                repeatList.addAll(learnList);
+                list.addAll(repeatList);
+                Log.i("ListComposer", "list contains " + list.size());
+                repeatList.clear();
+            } else {
+                //add @number_of_words words in list
+                //the rest of them leave in repeat file
+                list.addAll(repeatList.subList(0, _numOfWords));
+                Log.i("ListComposer", "added to list " + repeatList.subList(0, _numOfWords).size());
+                repeatList.subList(0, _numOfWords).clear();
+            }
+            mManager.rewriteWordsInFile(PackNames.REPEAT, repeatList);
+            mManager.rewriteWordsInFile(PackNames.LEARN, list);
+        }
+        return list;
     }
 
 }

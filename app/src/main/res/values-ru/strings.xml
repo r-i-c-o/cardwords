@@ -33,4 +33,5 @@
     <string name="continue_dialog_text">Ты выучил %d слов. Молодец! Изучим ещё?</string>
     <string name="continue_dialog_negative">Нет</string>
     <string name="continue_dialog_positive">Да!</string>
+    <string name="words_left">Осталось выучить: %d</string>
 </resources>

@@ -7,6 +7,7 @@ import com.ricode.kotlinwords.utilities.ConstantsKt;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class WordManager {
@@ -30,15 +31,14 @@ public class WordManager {
         return file.length() <= ConstantsKt.UNICODE_EMPTY;
     }
 
-    //TODO split method, make async
-    private ArrayList<Word> getNWordsFromCurrentPosition(int n) {
+    ArrayList<Word> getNWordsFromCurrentPosition(int numberOfWords) {
         ArrayList<Word> words = new ArrayList<>();
         int position = getWordsPosition();
         int counter = 1;
         String line;
         try(BufferedReader reader = new BufferedReader(new FileReader(getFile(PackNames.PACK)))){
             while ((line = reader.readLine()) != null) {
-                if ((counter - position) >= n) {
+                if ((counter - position) >= numberOfWords) {
                     setWordsPosition(counter);
                     break;
                 }
@@ -54,7 +54,7 @@ public class WordManager {
         return words;
     }
 
-    public ArrayList<Word> getAllWordsFromFile(PackNames filename) {
+    ArrayList<Word> getAllWordsFromFile(PackNames filename) {
         ArrayList<Word> words = new ArrayList<>();
         if (!isFileEmpty(getFile(filename))) {
             try (BufferedReader reader = new BufferedReader(new FileReader(getFile(filename)))) {
@@ -73,8 +73,7 @@ public class WordManager {
         return words;
     }
 
-    //TODO MOVE TO LISTCOMPOSER
-    public ArrayList<Word> setupWords() {
+    /*public ArrayList<Word> setupWords() {
         ArrayList<Word> current = getAllWordsFromFile(PackNames.LEARN);
         if (current.size() < 20) {
             ArrayList<Word> words = getNWordsFromCurrentPosition(20 - current.size());
@@ -82,9 +81,9 @@ public class WordManager {
         }
         rewriteWordsInFile(PackNames.LEARN, current);
         return current;
-    }
+    }*/
 
-    public void rewriteWordsInFile(PackNames filename, ArrayList<Word> words) {
+    public void rewriteWordsInFile(PackNames filename, List<Word> words) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(getFile(filename)))) {
             if (!words.isEmpty()){
                 for (Word w : words) {

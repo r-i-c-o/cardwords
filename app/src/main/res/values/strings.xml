@@ -14,6 +14,7 @@
     <string name="button_no">No</string>
     <string name="button_correct">Correct!</string>
     <string name="button_incorrect">Incorrect</string>
+    <string name="words_left">Words left: %d</string>
     <string name="continue_dialog">Continue learning?</string>
     <string name="ad_title">And card with ad, to support the app</string>
     <string name="button_skip_ad">Skip ad</string>

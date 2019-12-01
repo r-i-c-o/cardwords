@@ -8,7 +8,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 
-// determines current pack, returns it and some useful methods
 public class PackHelper {
 
     private Context mContext;

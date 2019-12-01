@@ -5,6 +5,7 @@ import com.ricode.kotlinwords.packs.Word
 
 interface IView {
     fun setWord(word: Word)
+    fun updateTextWordsLeft(number: Int)
 
     fun showTranscription()
     fun showTranslation()

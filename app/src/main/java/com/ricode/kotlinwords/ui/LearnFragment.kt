@@ -151,10 +151,12 @@ class LearnFragment : Fragment(), IView{
         textTranscription = cardView.findViewById(R.id.text_transcribe)
         textTranslation = cardView.findViewById(R.id.text_translate)
         fragment_learn_frame.addView(cardView)
+        words_left.visibility = View.VISIBLE
     }
 
     override fun hideCard() {
         fragment_learn_frame.removeAllViews()
+        words_left.visibility = View.GONE
     }
 
     override fun showDialog() {
@@ -168,6 +170,7 @@ class LearnFragment : Fragment(), IView{
         textWord.text = word.title
         textTranscription.text = word.transcription
         textTranslation.text = word.translation
+
     }
 
     override fun showTranscription() {
@@ -188,6 +191,10 @@ class LearnFragment : Fragment(), IView{
 
     override fun hideTranscription() {
         textTranscription.visibility = View.INVISIBLE
+    }
+
+    override fun updateTextWordsLeft(number: Int) {
+        words_left.text = getString(R.string.words_left, number)
     }
 
     override fun showAd(ad: UnifiedNativeAd) {
