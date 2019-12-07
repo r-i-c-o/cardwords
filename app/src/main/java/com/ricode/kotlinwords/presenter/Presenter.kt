@@ -1,18 +1,14 @@
 package com.ricode.kotlinwords.presenter
 
 import android.content.Context
-import com.ricode.kotlinwords.files.AppSettings
-import com.ricode.kotlinwords.packs.PackNames
-import com.ricode.kotlinwords.packs.Repository
-import com.ricode.kotlinwords.packs.Word
-import com.ricode.kotlinwords.packs.WordManager
+import com.ricode.kotlinwords.data.Repository
+import com.ricode.kotlinwords.data.Word
 import com.ricode.kotlinwords.services.AdsService
 
 abstract class Presenter(val mView: IView, context: Context) : IPresenter {
 
     private val adService = AdsService(context)
     protected val repository = Repository.getInstance(context)
-    protected val wordManager = WordManager(context)
 
     protected var mWordList: ArrayList<Word> = ArrayList()
     protected var mIndex = 0
@@ -27,7 +23,7 @@ abstract class Presenter(val mView: IView, context: Context) : IPresenter {
         mView.hideGuessingButtons()
         mView.hideCard()
 
-        if (adService.isAdLoaded()) {
+        if (adService.isAdLoaded) {
             mView.showAd(adService.getAd())
         }
         else mView.endSession()

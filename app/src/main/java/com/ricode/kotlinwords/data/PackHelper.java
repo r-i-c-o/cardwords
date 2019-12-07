@@ -1,4 +1,4 @@
-package com.ricode.kotlinwords.packs;
+package com.ricode.kotlinwords.data;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -14,6 +14,7 @@ public class PackHelper {
 
     public PackHelper(@NotNull Context context){
         mContext = context.getApplicationContext();
+        Log.i("ObjCounter", "packhelper created");
     }
 
     private SharedPreferences getAppSettings() {
@@ -24,7 +25,7 @@ public class PackHelper {
         return mContext.getSharedPreferences(ConstantsKt.SP_PACK_PROPERTIES + "_" + getCurrentPackName(), Context.MODE_PRIVATE);
     }
 
-    public String getCurrentPackName(){
+    private String getCurrentPackName(){
         return getAppSettings().getString(ConstantsKt.SP_NAME_CURRENT_PACK, "en_ru_common");
     }
 
@@ -34,18 +35,18 @@ public class PackHelper {
                 .apply();
     }
 
-    public int getPackPosition() {
+    int getPackPosition() {
         return getPackSettings()
                 .getInt(ConstantsKt.SP_PACK_POSITION, 1);
     }
 
-    public void setPackPosition(int pos) {
+    void setPackPosition(int pos) {
         getPackSettings()
                 .edit().putInt(ConstantsKt.SP_PACK_POSITION, pos)
                 .apply();
     }
 
-    public File getPackFile(PackNames name) {
+    File getPackFile(PackNames name) {
         File dir = new File(mContext.getFilesDir(), getCurrentPackName());
         if (name == PackNames.PACK) {
             String file = getCurrentPackName() + ".txt";
@@ -57,16 +58,11 @@ public class PackHelper {
         }
     }
 
-    public boolean isNeededToAddNewWords() {
-        return false;
-    }
-
     public void createPackDirectory(String name){
-        //create directory with {name} and add 4 files
         File appDir = mContext.getFilesDir();
         File dir = new File(appDir, name);
         if(dir.mkdir()) {
-            Log.i("createDir","created");
+            Log.i("createDir","created" + dir);
         } else Log.e("createDir","not created");
     }
 

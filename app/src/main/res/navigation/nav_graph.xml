@@ -29,7 +29,7 @@
         android:id="@+id/testFragment"
         android:name="com.ricode.kotlinwords.ui.TestFragment"
         android:label="@string/test_name"
-        tools:layout="@layout/fragment_test"/>
+        tools:layout="@layout/fragment_learn"/>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.ricode.kotlinwords.ui.SettingsFragment"
@@ -38,5 +38,6 @@
     <fragment
         android:id="@+id/learnFragment"
         android:name="com.ricode.kotlinwords.ui.LearnFragment"
-        android:label="LearnFragment" />
+        android:label="LearnFragment"
+        tools:layout="@layout/fragment_learn"/>
 </navigation>

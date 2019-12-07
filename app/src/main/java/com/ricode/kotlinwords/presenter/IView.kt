@@ -1,7 +1,7 @@
 package com.ricode.kotlinwords.presenter
 
 import com.google.android.gms.ads.formats.UnifiedNativeAd
-import com.ricode.kotlinwords.packs.Word
+import com.ricode.kotlinwords.data.Word
 
 interface IView {
     fun setWord(word: Word)

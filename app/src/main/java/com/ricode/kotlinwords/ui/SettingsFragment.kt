@@ -1,15 +1,8 @@
 package com.ricode.kotlinwords.ui
 
-import android.os.Bundle
-import androidx.preference.PreferenceFragmentCompat
-import com.ricode.kotlinwords.R
+import androidx.fragment.app.Fragment
 
-class SettingsFragment : PreferenceFragmentCompat() {
-
-    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-
-        setPreferencesFromResource(R.xml.app_preferences, rootKey)
-    }
-
+// set up settings
+class SettingsFragment : Fragment() {
 
 }

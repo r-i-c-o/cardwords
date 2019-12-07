@@ -13,7 +13,7 @@ import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import com.ricode.kotlinwords.R
 
-class ContinueDialogFragment: DialogFragment() {
+class TwoButtonDialog(private val dialogText: String): DialogFragment() {
 
     @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -30,8 +30,8 @@ class ContinueDialogFragment: DialogFragment() {
             targetFragment?.onActivityResult(targetRequestCode, Activity.RESULT_CANCELED, null)
             dismiss()
         }
-        val dialogText = v?.findViewById<TextView>(R.id.continue_dialog_text)
-        dialogText?.text = getString(R.string.continue_dialog_text, 20)
+        val textDialog = v?.findViewById<TextView>(R.id.continue_dialog_text)
+        textDialog?.text = dialogText
         builder.setView(v)
         val dialog = builder.create()
         dialog.setCanceledOnTouchOutside(false)

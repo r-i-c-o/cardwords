@@ -1,4 +1,4 @@
-package com.ricode.kotlinwords.packs
+package com.ricode.kotlinwords.data
 
 enum class PackNames {
     PACK,

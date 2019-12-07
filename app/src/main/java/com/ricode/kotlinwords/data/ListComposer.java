@@ -1,4 +1,4 @@
-package com.ricode.kotlinwords.packs;
+package com.ricode.kotlinwords.data;
 
 import android.content.Context;
 import android.util.Log;
@@ -16,6 +16,7 @@ public class ListComposer {
         Context mContext = context.getApplicationContext();
         mManager = new WordManager(mContext);
         _numOfWords = new AppSettings(mContext).getNumberOfWords();
+        Log.i("ObjCounter", "listcomposer created");
     }
 
     public ArrayList<Word> getWordsFromLearn() {
@@ -33,7 +34,6 @@ public class ListComposer {
             ArrayList<Word> repeatList = mManager.getAllWordsFromFile(PackNames.REPEAT);
             Log.i("ListComposer", "repeat contains " + repeatList.size());
             if (repeatList.size() < _numOfWords) {
-                //add words from pack file
                 ArrayList<Word> learnList = mManager.getNWordsFromCurrentPosition(_numOfWords - repeatList.size());
                 Log.i("ListComposer", "added from pack " + learnList.size());
                 repeatList.addAll(learnList);
@@ -41,8 +41,6 @@ public class ListComposer {
                 Log.i("ListComposer", "list contains " + list.size());
                 repeatList.clear();
             } else {
-                //add @number_of_words words in list
-                //the rest of them leave in repeat file
                 list.addAll(repeatList.subList(0, _numOfWords));
                 Log.i("ListComposer", "added to list " + repeatList.subList(0, _numOfWords).size());
                 repeatList.subList(0, _numOfWords).clear();

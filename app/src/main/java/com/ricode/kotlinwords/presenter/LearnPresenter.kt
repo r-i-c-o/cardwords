@@ -2,8 +2,8 @@ package com.ricode.kotlinwords.presenter
 
 import android.content.Context
 import com.ricode.kotlinwords.files.AppSettings
-import com.ricode.kotlinwords.packs.PackNames
-import com.ricode.kotlinwords.packs.Word
+import com.ricode.kotlinwords.data.PackNames
+import com.ricode.kotlinwords.data.Word
 
 class LearnPresenter(view: IView, context: Context): Presenter(view, context) {
     private val numOfTries = AppSettings(context).getNumberOfTries()
@@ -12,9 +12,9 @@ class LearnPresenter(view: IView, context: Context): Presenter(view, context) {
     override fun onPositiveButtonClicked() {
         mWordList[mIndex].incTries()
         if (mWordList[mIndex].tries == numOfTries) {
-            wordManager.appendWordToFile(PackNames.TEST, mWordList[mIndex])
+            repository.appendToFile(PackNames.TEST, mWordList[mIndex])
             mWordList.remove(mWordList[mIndex])
-            wordManager.rewriteWordsInFile(PackNames.LEARN, mWordList)
+            repository.rewriteWordsInFile(PackNames.LEARN, mWordList)
         }
         if (mWordList.isEmpty()) {
             onEndSession()
@@ -25,6 +25,7 @@ class LearnPresenter(view: IView, context: Context): Presenter(view, context) {
     }
 
     override fun onNegativeButtonClicked() {
+        mWordList[mIndex].decTries()
         showNextWord()
     }
 

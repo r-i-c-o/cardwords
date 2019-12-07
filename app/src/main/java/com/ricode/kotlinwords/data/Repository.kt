@@ -1,4 +1,4 @@
-package com.ricode.kotlinwords.packs
+package com.ricode.kotlinwords.data
 
 import android.content.Context
 
@@ -15,8 +15,12 @@ class Repository private constructor(context: Context) {
         return listComposer.wordsFromTest
     }
 
-    fun removeWord() {
-        
+    fun rewriteWordsInFile(name: PackNames, list: ArrayList<Word>) {
+        wordManager.rewriteWordsInFile(name, list)
+    }
+
+    fun appendToFile(name: PackNames, word: Word) {
+        wordManager.appendWordToFile(name, word)
     }
 
     companion object {

@@ -3,7 +3,7 @@ package com.ricode.kotlinwords.files;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.util.Log;
-import com.ricode.kotlinwords.packs.PackHelper;
+import com.ricode.kotlinwords.data.PackHelper;
 
 import java.io.*;
 

@@ -10,13 +10,13 @@ import com.ricode.kotlinwords.utilities.AD_ID
 
 class AdsService(private val mContext: Context) {
     private var ad: UnifiedNativeAd? = null
-    private var isAdLoaded = false
+    var isAdLoaded = false
 
     fun getAd() = ad!!
 
     fun loadAd() {
         isAdLoaded = false
-        ad?.destroy()
+        destroyAd()
 
         val adloader = AdLoader.Builder(mContext, AD_ID)
             .forUnifiedNativeAd {
@@ -32,7 +32,7 @@ class AdsService(private val mContext: Context) {
         adloader.loadAd(AdRequest.Builder().build())
     }
 
-    fun isAdLoaded() = isAdLoaded
+
 
     fun destroyAd() = ad?.destroy()
 

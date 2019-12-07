@@ -15,7 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.gms.ads.formats.UnifiedNativeAd
 import com.google.android.gms.ads.formats.UnifiedNativeAdView
 import com.ricode.kotlinwords.R
-import com.ricode.kotlinwords.packs.Word
+import com.ricode.kotlinwords.data.Word
 import com.ricode.kotlinwords.presenter.IPresenter
 import com.ricode.kotlinwords.presenter.IView
 import kotlinx.android.synthetic.main.fragment_learn.*
@@ -186,16 +186,11 @@ abstract class LearnBaseFragment : Fragment(), IView{
         textTranscription.visibility = View.INVISIBLE
     }
 
-    override fun updateTextWordsLeft(number: Int) {
-        words_left.text = getString(R.string.words_left, number)
-    }
-
     override fun showAd(ad: UnifiedNativeAd) {
         ad_card_text.visibility = View.VISIBLE
         button_hide_ad.visibility = View.VISIBLE
         val adView = LayoutInflater.from(activity).inflate(R.layout.ad_unified, fragment_learn_frame, false) as UnifiedNativeAdView
         populateNativeAd(ad, adView)
-        fragment_learn_frame.removeAllViews()
         fragment_learn_frame.addView(adView)
     }
 

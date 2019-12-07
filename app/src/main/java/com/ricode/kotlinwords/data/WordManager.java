@@ -1,4 +1,4 @@
-package com.ricode.kotlinwords.packs;
+package com.ricode.kotlinwords.data;
 
 import android.content.Context;
 import android.util.Log;
@@ -8,7 +8,6 @@ import com.ricode.kotlinwords.utilities.ConstantsKt;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class WordManager {
 
@@ -21,6 +20,7 @@ public class WordManager {
         Context mContext = context.getApplicationContext();
         mPackHelper = new PackHelper(mContext);
         mAppSettings = new AppSettings(mContext);
+        Log.i("ObjCounter", "wordmanager created");
     }
 
     private File getFile(PackNames filename) {
@@ -33,7 +33,7 @@ public class WordManager {
 
     ArrayList<Word> getNWordsFromCurrentPosition(int numberOfWords) {
         ArrayList<Word> words = new ArrayList<>();
-        int position = getWordsPosition();
+        int position = mPackHelper.getPackPosition();
         int counter = 1;
         String line;
         try(BufferedReader reader = new BufferedReader(new FileReader(getFile(PackNames.PACK)))){
@@ -65,7 +65,6 @@ public class WordManager {
                         words.add(word);
                     }
                 }
-                //Log.i(TAG, "Added " + words.size() + " words from " + getFile(filename).toString());
             } catch (IOException ioe) {
                 Log.e(TAG, "Couldn't open " + filename + " file: " + ioe);
             }
@@ -103,16 +102,12 @@ public class WordManager {
         }
     }
 
-    private int getWordsPosition() {
-        return mPackHelper.getPackPosition();
-    }
-
     private void setWordsPosition(int position) {
         mPackHelper.setPackPosition(position);
     }
 
     private Word makeWord(String string) {
-        int tries = mAppSettings.getNumberOfTries();
+        int tries = mAppSettings.getNumberOfTries() - 1;
         String[] components = string.split("\t");
         return new Word(components[0], components[1], components[2], tries);
     }

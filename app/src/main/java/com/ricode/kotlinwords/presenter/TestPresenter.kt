@@ -1,21 +1,21 @@
 package com.ricode.kotlinwords.presenter
 
 import android.content.Context
-import com.ricode.kotlinwords.packs.PackNames
+import com.ricode.kotlinwords.data.PackNames
 
 class TestPresenter(view: IView, context: Context): Presenter(view, context) {
 
     override fun getList() = repository.getTestWords()
 
     override fun onPositiveButtonClicked() {
-        wordManager.appendWordToFile(PackNames.DONE, mWordList[mIndex])
+        repository.appendToFile(PackNames.DONE, mWordList[mIndex])
         removeAndRewrite()
 
         endOrContinue()
     }
 
     override fun onNegativeButtonClicked() {
-        wordManager.appendWordToFile(PackNames.REPEAT, mWordList[mIndex])
+        repository.appendToFile(PackNames.REPEAT, mWordList[mIndex])
         removeAndRewrite()
 
         endOrContinue()
@@ -23,7 +23,7 @@ class TestPresenter(view: IView, context: Context): Presenter(view, context) {
 
     private fun removeAndRewrite() {
         mWordList.remove(mWordList[mIndex])
-        wordManager.rewriteWordsInFile(PackNames.TEST, mWordList)
+        repository.rewriteWordsInFile(PackNames.TEST, mWordList)
     }
 
     private fun endOrContinue() {
