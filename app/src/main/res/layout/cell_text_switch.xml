@@ -7,7 +7,7 @@
     android:background="?attr/colorPrimary">
 
     <TextView
-        android:id="@+id/cell_text"
+        android:id="@+id/cell_text_sw"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

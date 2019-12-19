@@ -2,8 +2,8 @@ package com.ricode.kotlinwords.files
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
 import com.ricode.kotlinwords.utilities.SP_APP_SETTINGS
+import com.ricode.kotlinwords.utilities.SP_DARK_MODE
 import com.ricode.kotlinwords.utilities.SP_SETTINGS_NUMBER_TRIES
 import com.ricode.kotlinwords.utilities.SP_SETTINGS_NUMBER_WORDS
 
@@ -24,6 +24,14 @@ class AppSettings (context: Context) {
 
     fun setNumberOfTries(i: Int) {
         appSettings().edit().putInt(SP_SETTINGS_NUMBER_TRIES, i).apply()
+    }
+
+    fun getDarkMode(): Boolean {
+        return settings.getBoolean(SP_DARK_MODE, false)
+    }
+
+    fun setDarkMode(isActive: Boolean) {
+        settings.edit().putBoolean(SP_DARK_MODE, isActive).apply()
     }
 
     /*companion object {

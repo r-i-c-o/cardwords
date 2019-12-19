@@ -8,3 +8,4 @@ const val UNICODE_EMPTY = 3
 const val SP_APP_SETTINGS = "settings"
 const val SP_SETTINGS_NUMBER_WORDS = "word_number"
 const val SP_SETTINGS_NUMBER_TRIES = "tries_number"
+const val SP_DARK_MODE = "dark_mode"
