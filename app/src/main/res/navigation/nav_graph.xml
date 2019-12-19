@@ -36,6 +36,7 @@
         android:id="@+id/settingsFragment"
         android:name="com.ricode.kotlinwords.ui.SettingsFragment"
         android:label="@string/settings_name"
+        tools:layout="@layout/fragment_settings"
          />
     <fragment
         android:id="@+id/learnFragment"
