@@ -4,7 +4,7 @@ package com.ricode.kotlinwords.ui
 import com.ricode.kotlinwords.R
 import com.ricode.kotlinwords.presenter.IPresenter
 import com.ricode.kotlinwords.presenter.TestPresenter
-import kotlinx.android.synthetic.main.fragment_learn.*
+import kotlinx.android.synthetic.main.fragment_cardwords.*
 
 // TODO come up with endSession
 class TestFragment : LearnBaseFragment() {

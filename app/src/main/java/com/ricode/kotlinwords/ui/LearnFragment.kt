@@ -3,7 +3,7 @@ package com.ricode.kotlinwords.ui
 import com.ricode.kotlinwords.R
 import com.ricode.kotlinwords.presenter.IPresenter
 import com.ricode.kotlinwords.presenter.LearnPresenter
-import kotlinx.android.synthetic.main.fragment_learn.*
+import kotlinx.android.synthetic.main.fragment_cardwords.*
 
 class LearnFragment: LearnBaseFragment() {
 

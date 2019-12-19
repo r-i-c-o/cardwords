@@ -10,12 +10,6 @@ import com.ricode.kotlinwords.utilities.SP_SETTINGS_NUMBER_WORDS
 //Singleton app settings class
 class AppSettings (context: Context) {
 
-    //private val mContext: Context = context.applicationContext
-
-    init {
-        Log.i("ObjCounter", "appsettings created")
-    }
-
     private val settings: SharedPreferences = context.applicationContext.getSharedPreferences(SP_APP_SETTINGS, Context.MODE_PRIVATE)
 
     private fun appSettings() = settings

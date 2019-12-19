@@ -18,7 +18,7 @@ import com.ricode.kotlinwords.R
 import com.ricode.kotlinwords.data.Word
 import com.ricode.kotlinwords.presenter.IPresenter
 import com.ricode.kotlinwords.presenter.IView
-import kotlinx.android.synthetic.main.fragment_learn.*
+import kotlinx.android.synthetic.main.fragment_cardwords.*
 
 const val REQUEST_CONTINUE = 1
 
@@ -41,7 +41,7 @@ abstract class LearnBaseFragment : Fragment(), IView{
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_learn, container, false)
+        return inflater.inflate(R.layout.fragment_cardwords, container, false)
     }
 
     override fun onDestroy() {
