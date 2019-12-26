@@ -1,10 +1,11 @@
 package com.ricode.kotlinwords.ui
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Switch
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -15,14 +16,57 @@ import com.ricode.kotlinwords.R
 import com.ricode.kotlinwords.files.AppSettings
 import kotlinx.android.synthetic.main.fragment_settings.*
 
-// set up settings
-class SettingsFragment : Fragment() {
+class SettingsFragment : Fragment(), OnItemClickListener {
+
+    val VIEW_EMPTY = 0
+    val VIEW_NUM = 1
+    val VIEW_SWITCH = 2
+
+    var rowCount = 0
+    val rowWordNumber = rowCount++
+    val rowWordRepeats = rowCount++
+    val rowDarkTheme = rowCount++
 
     private lateinit var mSettings: AppSettings
+    private lateinit var list: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mSettings = AppSettings(requireContext())
+    }
+
+    override fun onItemClick(position: Int) {
+        when (position) {
+            rowWordNumber -> {
+
+                showNumPickDialog("words", mSettings.getNumberOfWords())
+            }
+            rowWordRepeats -> {
+
+            }
+            rowDarkTheme -> {
+
+            }
+        }
+    }
+
+    override fun onSwitchChanged(position: Int, isChecked: Boolean) {
+        when (position) {
+            rowDarkTheme -> {
+                mSettings.setDarkMode(isChecked)
+                updateUI()
+                activity?.recreate()
+            }
+        }
+    }
+
+    private fun showNumPickDialog(text: String, initNum: Int) {
+        val dialogBuilder = AlertDialog.Builder(requireContext())
+        val array = Array(5) { i-> (10 + 5*i).toString()}
+        dialogBuilder.setTitle(text)
+        dialogBuilder.setItems(array, DialogInterface.OnClickListener { _, which ->  })
+        val dialog = dialogBuilder.create()
+        dialog.show()
     }
 
     override fun onCreateView(
@@ -31,10 +75,14 @@ class SettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_settings, container, false)
-        val list = view.findViewById<RecyclerView>(R.id.settings_list)
-        list.adapter = SettingsAdapter()
+        list = view.findViewById<RecyclerView>(R.id.settings_list)
+        list.adapter = SettingsAdapter(this)
         list.layoutManager = LinearLayoutManager(requireContext())
         return view
+    }
+
+    private fun updateUI() {
+        list.adapter?.notifyDataSetChanged()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,17 +91,7 @@ class SettingsFragment : Fragment() {
         }
     }
 
-    private inner class SettingsAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-        val VIEW_EMPTY = 0
-        val VIEW_NUM = 1
-        val VIEW_SWITCH = 2
-
-        var rowCount = 0
-        val rowWordNumber = rowCount++
-        val rowWordRepeats = rowCount++
-        val divider = rowCount++
-        val rowDarkTheme = rowCount++
-
+    private inner class SettingsAdapter(val listener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             return when (viewType) {
                 VIEW_NUM -> {
@@ -79,17 +117,25 @@ class SettingsFragment : Fragment() {
             when (holder.itemViewType) {
                 VIEW_NUM -> {
                     val numHolder = holder as TextNumberRow
+                    var text = ""
+                    var num = 0
                     when (position) {
-                        rowWordNumber -> numHolder.bind(getString(R.string.settings_number_of_words), mSettings.getNumberOfWords())
-                        rowWordRepeats -> numHolder.bind(getString(R.string.settings_tries), mSettings.getNumberOfTries())
+                        rowWordNumber -> {
+                            text = getString(R.string.settings_number_of_words)
+                            num = mSettings.getNumberOfWords()
+                        }
+                        rowWordRepeats -> {
+                            text = getString(R.string.settings_tries)
+                            num = mSettings.getNumberOfTries()
+                        }
                     }
+                    numHolder.bind(text, num, listener, position)
 
                 }
                 VIEW_SWITCH -> {
                     val switchHolder = holder as TextSwitchRow
-                    switchHolder.bind(getString(R.string.settings_darkmode), mSettings.getDarkMode())
+                    switchHolder.bind(getString(R.string.settings_darkmode), mSettings.getDarkMode(), listener, position)
                 }
-                else -> {}
             }
         }
 
@@ -105,22 +151,34 @@ class SettingsFragment : Fragment() {
     class TextNumberRow(itemView: View): RecyclerView.ViewHolder(itemView) {
         val text: TextView = itemView.findViewById(R.id.cell_text_num)
         val number: TextView = itemView.findViewById(R.id.cell_num)
-        fun bind(settingText: String, settingNumber: Int) {
+        fun bind(settingText: String, settingNumber: Int, listener: OnItemClickListener, position: Int) {
             text.text = settingText
             number.text = settingNumber.toString()
+            itemView.setOnClickListener {
+                listener.onItemClick(position)
+            }
+
         }
     }
 
     class TextSwitchRow(itemView: View): RecyclerView.ViewHolder(itemView) {
         val text: TextView = itemView.findViewById(R.id.cell_text_sw)
         val switch: Switch = itemView.findViewById(R.id.cell_switch)
-        fun bind(settingText: String, bool: Boolean) {
+        fun bind(settingText: String, bool: Boolean, listener: OnItemClickListener, position: Int) {
             text.text = settingText
             switch.isChecked = bool
+            switch.setOnCheckedChangeListener {_, isChecked ->
+                listener.onSwitchChanged(position, isChecked)
+            }
         }
     }
 
     class TextRow(itemView: View): RecyclerView.ViewHolder(itemView) {}
 
     class EmptyRow(itemView: View): RecyclerView.ViewHolder(itemView) {}
+}
+
+interface OnItemClickListener {
+    fun onItemClick(position: Int)
+    fun onSwitchChanged(position: Int, isChecked: Boolean)
 }

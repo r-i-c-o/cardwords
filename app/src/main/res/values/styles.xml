@@ -45,5 +45,4 @@
     <style name="DialogButtonNegative" parent="ButtonPurpleRedGradientStyle">
         <item name="android:background">@drawable/button_dialog_negative_style</item>
     </style>
-
 </resources>

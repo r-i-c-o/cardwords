@@ -19,6 +19,6 @@ class LearnFragment: LearnBaseFragment() {
         val dialogFragment = TwoButtonDialog(getString(R.string.continue_dialog_text, 20))
         dialogFragment.setTargetFragment(this, REQUEST_CONTINUE)
         val fm = fragmentManager
-        if (fm != null) dialogFragment.show(fm, "TAG")
+        if (fm != null) dialogFragment.show(fm, "LearnFragment")
     }
 }
