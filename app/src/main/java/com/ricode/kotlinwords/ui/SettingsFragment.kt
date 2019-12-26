@@ -1,7 +1,6 @@
 package com.ricode.kotlinwords.ui
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +25,7 @@ class SettingsFragment : Fragment(), OnItemClickListener {
     val rowWordNumber = rowCount++
     val rowWordRepeats = rowCount++
     val rowDarkTheme = rowCount++
+    //val rowAppVersion = rowCount++
 
     private lateinit var mSettings: AppSettings
     private lateinit var list: RecyclerView
@@ -38,14 +38,26 @@ class SettingsFragment : Fragment(), OnItemClickListener {
     override fun onItemClick(position: Int) {
         when (position) {
             rowWordNumber -> {
-
-                showNumPickDialog("words", mSettings.getNumberOfWords())
+                val dialogBuilder = AlertDialog.Builder(requireContext())
+                val array = Array(8) { i-> (10 + 5*i).toString()}
+                dialogBuilder.setTitle(getString(R.string.settings_number_of_words))
+                dialogBuilder.setItems(array) { _, which ->
+                    mSettings.setNumberOfWords(array[which].toInt())
+                    updateUI()
+                }
+                val dialog = dialogBuilder.create()
+                dialog.show()
             }
             rowWordRepeats -> {
-
-            }
-            rowDarkTheme -> {
-
+                val dialogBuilder = AlertDialog.Builder(requireContext())
+                val array = Array(4) { i-> (i + 2).toString()}
+                dialogBuilder.setTitle(getString(R.string.settings_tries))
+                dialogBuilder.setItems(array) { _, which ->
+                    mSettings.setNumberOfTries(array[which].toInt())
+                    updateUI()
+                }
+                val dialog = dialogBuilder.create()
+                dialog.show()
             }
         }
     }
@@ -60,22 +72,13 @@ class SettingsFragment : Fragment(), OnItemClickListener {
         }
     }
 
-    private fun showNumPickDialog(text: String, initNum: Int) {
-        val dialogBuilder = AlertDialog.Builder(requireContext())
-        val array = Array(5) { i-> (10 + 5*i).toString()}
-        dialogBuilder.setTitle(text)
-        dialogBuilder.setItems(array, DialogInterface.OnClickListener { _, which ->  })
-        val dialog = dialogBuilder.create()
-        dialog.show()
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_settings, container, false)
-        list = view.findViewById<RecyclerView>(R.id.settings_list)
+        list = view.findViewById(R.id.settings_list)
         list.adapter = SettingsAdapter(this)
         list.layoutManager = LinearLayoutManager(requireContext())
         return view
@@ -150,20 +153,19 @@ class SettingsFragment : Fragment(), OnItemClickListener {
 
     class TextNumberRow(itemView: View): RecyclerView.ViewHolder(itemView) {
         val text: TextView = itemView.findViewById(R.id.cell_text_num)
-        val number: TextView = itemView.findViewById(R.id.cell_num)
+        private val number: TextView = itemView.findViewById(R.id.cell_num)
         fun bind(settingText: String, settingNumber: Int, listener: OnItemClickListener, position: Int) {
             text.text = settingText
             number.text = settingNumber.toString()
             itemView.setOnClickListener {
                 listener.onItemClick(position)
             }
-
         }
     }
 
     class TextSwitchRow(itemView: View): RecyclerView.ViewHolder(itemView) {
         val text: TextView = itemView.findViewById(R.id.cell_text_sw)
-        val switch: Switch = itemView.findViewById(R.id.cell_switch)
+        private val switch: Switch = itemView.findViewById(R.id.cell_switch)
         fun bind(settingText: String, bool: Boolean, listener: OnItemClickListener, position: Int) {
             text.text = settingText
             switch.isChecked = bool
@@ -173,9 +175,11 @@ class SettingsFragment : Fragment(), OnItemClickListener {
         }
     }
 
-    class TextRow(itemView: View): RecyclerView.ViewHolder(itemView) {}
+    class TextRow(itemView: View): RecyclerView.ViewHolder(itemView) {
 
-    class EmptyRow(itemView: View): RecyclerView.ViewHolder(itemView) {}
+    }
+
+    class EmptyRow(itemView: View): RecyclerView.ViewHolder(itemView)
 }
 
 interface OnItemClickListener {

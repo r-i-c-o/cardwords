@@ -35,5 +35,6 @@
     <string name="settings_swipemode_summary">Enable to use swipes instead of buttons </string>
     <string name="settings_tries">Number of tries</string>
     <string name="settings_tries_summary">Set the number of tries</string>
+    <!--Misc-->
     <string name="content_descr_back">Back</string>
 </resources>
