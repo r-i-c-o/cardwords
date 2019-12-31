@@ -24,6 +24,7 @@ class SettingsFragment : Fragment(), OnItemClickListener {
     var rowCount = 0
     val rowWordNumber = rowCount++
     val rowWordRepeats = rowCount++
+    val rowDivider = rowCount++
     val rowDarkTheme = rowCount++
     //val rowAppVersion = rowCount++
 

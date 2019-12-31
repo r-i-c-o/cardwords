@@ -11,6 +11,7 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
         <item name="android:fontFamily">@font/open_sans</item>
+        <item name="android:alertDialogTheme">@style/AppDialog</item>
     </style>
 
     <style name="AppThemeDark" parent="AppTheme">
@@ -20,6 +21,19 @@
         <item name="android:textColorSecondary">@color/textSecondaryWhite</item>
         <item name="android:windowBackground">@color/colorBackgroundNight</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:alertDialogTheme">@style/AppDialogDark</item>
+    </style>
+
+    <style name="AppDialog" parent="Theme.MaterialComponents.Dialog.Alert">
+        <item name="android:textColorPrimary">@color/textBlack</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:textColorAlertDialogListItem">@color/textBlack</item>
+    </style>
+
+    <style name="AppDialogDark" parent="Theme.MaterialComponents.Dialog.Alert">
+        <item name="android:textColorPrimary">@color/textWhite</item>
+        <item name="android:background">@color/colorPrimaryDarkNight</item>
+        <item name="textColorAlertDialogListItem">@color/textWhite</item>
     </style>
 
     <style name="ButtonBlueRedGradientStyle" parent="Widget.AppCompat.Button">

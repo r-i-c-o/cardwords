@@ -16,7 +16,7 @@ class LearnFragment: LearnBaseFragment() {
     }
 
     override fun endSession() {
-        val dialogFragment = TwoButtonDialog(getString(R.string.continue_dialog_text, 20))
+        val dialogFragment = TwoButtonDialog(getString(R.string.continue_dialog_text))
         dialogFragment.setTargetFragment(this, REQUEST_CONTINUE)
         val fm = fragmentManager
         if (fm != null) dialogFragment.show(fm, "LearnFragment")

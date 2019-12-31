@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.ricode.kotlinwords.R
+import com.ricode.kotlinwords.data.PackNames
+import com.ricode.kotlinwords.data.WordManager
 import com.ricode.kotlinwords.files.AssetHelper
 import kotlinx.android.synthetic.main.fragment_start.*
 
@@ -32,8 +34,15 @@ class StartFragment : Fragment() {
         }
 
         button_test.setOnClickListener { v ->
-            val navController = v.findNavController()
-            navController.navigate(R.id.action_startFragment_to_testFragment)
+            if (!WordManager(requireContext()).isFileEmpty(PackNames.TEST)) {
+                val navController = v.findNavController()
+                navController.navigate(R.id.action_startFragment_to_testFragment)
+            } else {
+                val dialogFragment = TwoButtonDialog(getString(R.string.continue_dialog_text))
+                dialogFragment.setTargetFragment(this, REQUEST_CONTINUE)
+                val fm = fragmentManager
+                if (fm != null) dialogFragment.show(fm, "LearnFragment")
+            }
         }
 
         button_settings.setOnClickListener { v ->

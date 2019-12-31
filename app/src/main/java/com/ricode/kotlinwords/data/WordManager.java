@@ -27,8 +27,8 @@ public class WordManager {
         return mPackHelper.getPackFile(filename);
     }
 
-    private boolean isFileEmpty(File file) {
-        return file.length() <= ConstantsKt.UNICODE_EMPTY;
+    public boolean isFileEmpty(PackNames file) {
+        return getFile(file).length() <= ConstantsKt.UNICODE_EMPTY;
     }
 
     ArrayList<Word> getNWordsFromCurrentPosition(int numberOfWords) {
@@ -56,7 +56,7 @@ public class WordManager {
 
     ArrayList<Word> getAllWordsFromFile(PackNames filename) {
         ArrayList<Word> words = new ArrayList<>();
-        if (!isFileEmpty(getFile(filename))) {
+        if (!isFileEmpty(filename)) {
             try (BufferedReader reader = new BufferedReader(new FileReader(getFile(filename)))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
