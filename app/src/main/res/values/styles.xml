@@ -36,27 +36,30 @@
         <item name="textColorAlertDialogListItem">@color/textWhite</item>
     </style>
 
-    <style name="ButtonBlueRedGradientStyle" parent="Widget.AppCompat.Button">
-        <item name="android:background">@drawable/button_blue_red_style</item>
-        <item name="android:textColor">@color/button_text_color</item>
-
-    </style>
-
-    <style name="ButtonBluePurpleGradientStyle" parent="Widget.AppCompat.Button">
-        <item name="android:background">@drawable/button_blue_purple_style</item>
+    <style name="ButtonNeutralStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_neutral_style</item>
         <item name="android:textColor">@color/button_text_color</item>
     </style>
 
-    <style name="ButtonPurpleRedGradientStyle" parent="Widget.AppCompat.Button">
-        <item name="android:background">@drawable/button_purple_red_style</item>
+    <style name="ButtonPositiveStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_positive_style</item>
         <item name="android:textColor">@color/button_text_color</item>
     </style>
 
-    <style name="DialogButtonPositive" parent="ButtonBluePurpleGradientStyle">
+    <style name="ButtonNegativeStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_negative_style</item>
+        <item name="android:textColor">@color/button_text_color</item>
+    </style>
+
+    <style name="DialogButtonPositive" parent="ButtonPositiveStyle">
         <item name="android:background">@drawable/button_dialog_positive_style</item>
     </style>
 
-    <style name="DialogButtonNegative" parent="ButtonPurpleRedGradientStyle">
+    <style name="DialogButtonNegative" parent="ButtonNegativeStyle">
         <item name="android:background">@drawable/button_dialog_negative_style</item>
+    </style>
+
+    <style name="DialogButtonNeutral" parent="ButtonNeutralStyle">
+        <item name="android:background">@drawable/button_dialog_neutral_style</item>
     </style>
 </resources>

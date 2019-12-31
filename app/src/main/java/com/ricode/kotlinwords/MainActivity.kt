@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         updateTheme()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        MobileAds.initialize(this) {}
+        MobileAds.initialize(this)
     }
 
     fun updateTheme() {

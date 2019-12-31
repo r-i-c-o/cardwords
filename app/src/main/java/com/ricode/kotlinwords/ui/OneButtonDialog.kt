@@ -7,26 +7,19 @@ import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.KeyEvent
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import com.ricode.kotlinwords.R
 
-class TwoButtonDialog(private val dialogText: String): DialogFragment() {
-
+class OneButtonDialog(private val dialogText: String): DialogFragment() {
     @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(requireActivity())
         val inflater = activity?.layoutInflater
-        val v = inflater?.inflate(R.layout.two_button_dialog_layout, null)
-        val positiveButton = v?.findViewById<Button>(R.id.button_dialog_positive)
-        positiveButton?.setOnClickListener {
-            targetFragment?.onActivityResult(targetRequestCode, Activity.RESULT_OK, null)
-            dismiss()
-        }
-        val negativeButton = v?.findViewById<Button>(R.id.button_dialog_negative)
-        negativeButton?.setOnClickListener {
+        val v = inflater?.inflate(R.layout.one_button_dialog_layout, null)
+        val singleButton = v?.findViewById<Button>(R.id.button_neutral)
+        singleButton?.setOnClickListener {
             targetFragment?.onActivityResult(targetRequestCode, Activity.RESULT_CANCELED, null)
             dismiss()
         }
@@ -34,17 +27,7 @@ class TwoButtonDialog(private val dialogText: String): DialogFragment() {
         textDialog?.text = dialogText
         builder.setView(v)
         val dialog = builder.create()
-        dialog.setCanceledOnTouchOutside(false)
-        dialog.setOnKeyListener {_, keyCode, _ ->
-            if (keyCode == KeyEvent.KEYCODE_BACK) {
-                targetFragment?.onActivityResult(targetRequestCode, Activity.RESULT_CANCELED, null)
-                dismiss()
-            }
-            true
-        }
         //dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
         return dialog
     }
-
 }

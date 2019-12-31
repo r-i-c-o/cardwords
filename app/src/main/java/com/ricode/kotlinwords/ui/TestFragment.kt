@@ -1,12 +1,12 @@
 package com.ricode.kotlinwords.ui
 
 
+import androidx.navigation.fragment.findNavController
 import com.ricode.kotlinwords.R
 import com.ricode.kotlinwords.presenter.IPresenter
 import com.ricode.kotlinwords.presenter.TestPresenter
 import kotlinx.android.synthetic.main.fragment_cardwords.*
 
-// TODO come up with endSession
 class TestFragment : LearnBaseFragment() {
 
     override fun setPresenter(): IPresenter {
@@ -18,7 +18,7 @@ class TestFragment : LearnBaseFragment() {
     }
 
     override fun endSession() {
-
+        findNavController().navigateUp()
     }
 
 

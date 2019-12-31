@@ -38,10 +38,9 @@ class StartFragment : Fragment() {
                 val navController = v.findNavController()
                 navController.navigate(R.id.action_startFragment_to_testFragment)
             } else {
-                val dialogFragment = TwoButtonDialog(getString(R.string.continue_dialog_text))
-                dialogFragment.setTargetFragment(this, REQUEST_CONTINUE)
+                val dialogFragment = OneButtonDialog(getString(R.string.empty_test_dialog_text))
                 val fm = fragmentManager
-                if (fm != null) dialogFragment.show(fm, "LearnFragment")
+                if (fm != null) dialogFragment.show(fm, "StartFragment")
             }
         }
 

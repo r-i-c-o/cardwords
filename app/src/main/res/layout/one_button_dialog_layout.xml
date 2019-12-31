@@ -14,47 +14,30 @@
         android:background="?attr/colorPrimary">
 
         <TextView
-            android:id="@+id/continue_dialog_text"
+            android:id="@+id/dialog_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
             android:textAlignment="center"
             android:textSize="22sp"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+            app:layout_constraintBottom_toTopOf="@+id/button_neutral"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Many many words"
-            android:layout_marginBottom="16dp" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent">
+            tools:text="Many many words" />
 
         <Button
-            android:id="@+id/continue_dialog_positive"
-            style="@style/DialogButtonPositive"
-            android:layout_width="wrap_content"
+            android:id="@+id/button_neutral"
+            style="@style/DialogButtonNeutral"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/continue_dialog_positive"
+            android:text="@string/dialog_dismiss"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
-            android:id="@+id/continue_dialog_negative"
-            style="@style/DialogButtonNegative"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/continue_dialog_negative"
-            android:layout_weight="1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-    </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.cardview.widget.CardView>

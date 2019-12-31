@@ -80,7 +80,7 @@
     </androidx.cardview.widget.CardView>
 
     <Button
-        style="@style/ButtonBluePurpleGradientStyle"
+        style="@style/ButtonPositiveStyle"
         android:id="@+id/button_correct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -95,7 +95,7 @@
         tools:text="positive" />
 
     <Button
-        style="@style/ButtonBlueRedGradientStyle"
+        style="@style/ButtonNeutralStyle"
         android:id="@+id/button_reveal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -109,7 +109,7 @@
         android:text="@string/button_show"/>
 
     <Button
-        style="@style/ButtonPurpleRedGradientStyle"
+        style="@style/ButtonNegativeStyle"
         android:id="@+id/button_incorrect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -123,7 +123,7 @@
         tools:text="negative" />
 
     <Button
-        style="@style/ButtonBlueRedGradientStyle"
+        style="@style/ButtonNeutralStyle"
         android:visibility="gone"
         android:id="@+id/button_hide_ad"
         android:layout_width="match_parent"

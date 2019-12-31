@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -16,20 +16,67 @@
         android:orientation="horizontal"
         android:gravity="center">
 
-        <Button
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/button_learn"
-            style="@style/Widget.AppCompat.Button"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:text="@string/button_learn"
-            android:layout_margin="1dp"/>
+            android:layout_margin="1dp"
+            app:cardCornerRadius="5dp">
 
-        <Button
+        <LinearLayout
+            android:id="@+id/image_button_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="?attr/colorPrimary">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:src="@drawable/ic_button_learn"
+                android:src="@drawable/ic_button_learn"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/button_learn"
+                android:textAlignment="center"
+                android:textSize="20sp" />
+        </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_test"
+            android:layout_margin="1dp"
+            app:cardCornerRadius="5dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="?attr/colorPrimary">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_test_button1"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/button_test"
+                    android:textAlignment="center"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <!--<Button
             android:id="@+id/button_test"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:text="@string/button_test"
-            android:layout_margin="1dp"/>
+            android:layout_margin="1dp"/>-->
 
     </LinearLayout>
 
@@ -39,11 +86,37 @@
         android:orientation="horizontal"
         android:gravity="center">
 
-        <Button
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_settings"
+            android:layout_margin="1dp"
+            app:cardCornerRadius="5dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="?attr/colorPrimary">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_settings_button"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/button_settings"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <!--<Button
             android:id="@+id/button_settings"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:text="@string/button_settings" />
+            android:text="@string/button_settings" />-->
 
     </LinearLayout>
 

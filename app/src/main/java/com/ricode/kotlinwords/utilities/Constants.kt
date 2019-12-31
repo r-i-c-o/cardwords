@@ -1,6 +1,6 @@
 package com.ricode.kotlinwords.utilities
 
-const val AD_ID = "ca-app-pub-3940256099942544/2247696110"
+const val AD_ID = "ca-app-pub-8896088681985586/6358465928"
 const val SP_NAME_CURRENT_PACK = "current_pack"
 const val SP_PACK_PROPERTIES = "pack_properties"
 const val SP_PACK_POSITION = "position"

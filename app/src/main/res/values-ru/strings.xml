@@ -30,9 +30,11 @@
     <string name="app_version">Версия</string>
     <string name="button_skip_ad">Пропустить объявление</string>
     <string name="ad_title">И карточка с рекламой. Для поддержки приложения</string>
-    <string name="continue_dialog_text">Ты выучил %d слов. Молодец! Изучим ещё?</string>
+    <string name="continue_dialog_text">Молодец! Изучим ещё больше слов?</string>
     <string name="continue_dialog_negative">Нет</string>
     <string name="continue_dialog_positive">Да!</string>
     <string name="words_left">Осталось выучить: %d</string>
     <string name="content_descr_back">Назад</string>
+    <string name="empty_test_dialog_text">Слов для проверки нет. Чтобы проверить себя, выучите слова в разделе \"Обучение\"</string>
+    <string name="dialog_dismiss">Скрыть</string>
 </resources>
