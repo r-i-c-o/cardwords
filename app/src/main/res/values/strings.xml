@@ -15,7 +15,8 @@
     <string name="button_no">No</string>
     <string name="button_correct">Correct!</string>
     <string name="button_incorrect">Incorrect</string>
-    <string name="words_left">Words left: %d</string>
+    <string name="words_left_learn">Words left to learn: %d</string>
+    <string name="words_left_test">Words left to test: %d</string>
     <string name="continue_dialog">Continue learning?</string>
     <string name="ad_title">And card with ad, to support the app</string>
     <string name="button_skip_ad">Skip ad</string>
@@ -28,7 +29,8 @@
     <string name="settings_reset_summary">Reset your progress </string>
     <string name="settings_number_of_words">Number of words</string>
     <string name="settings_number_of_words_summary">Set the number of words in "Learn" list</string>
-    <string name="app_version">Version</string>
+    <string name="version_app">Version</string>
+    <string name="version_app_summary">0.9b</string>
     <string name="settings_category_other">Other</string>
     <string name="settings_darkmode">Dark mode</string>
     <string name="settings_darkmode_summary">Enable dark mode</string>
@@ -39,4 +41,5 @@
     <!--Misc-->
     <string name="content_descr_back">Back</string>
     <string name="dialog_dismiss">Dismiss</string>
+
 </resources>

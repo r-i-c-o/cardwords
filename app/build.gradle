@@ -9,11 +9,11 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.ricode.kotlinwords"
+        applicationId "com.ricode.cardwords"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
-        versionName "0.9"
+        versionName "0.9b"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

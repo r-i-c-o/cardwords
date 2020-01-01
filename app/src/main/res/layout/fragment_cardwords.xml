@@ -7,8 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent">
@@ -21,7 +21,9 @@
                 android:id="@+id/words_left"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -33,11 +35,8 @@
                 android:id="@+id/button_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
                 android:contentDescription="@string/content_descr_back"
+                android:padding="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -80,61 +79,48 @@
     </androidx.cardview.widget.CardView>
 
     <Button
-        style="@style/ButtonPositiveStyle"
-        android:id="@+id/button_correct"
-        android:layout_width="wrap_content"
+        android:id="@+id/button_neutral"
+        style="@style/ButtonNeutralStyle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/button_show"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <Button
+        android:id="@+id/button_positive"
+        style="@style/ButtonPositiveStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginBottom="24dp"
         android:text="@string/button_correct"
         android:textSize="12sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent="0.3"
         tools:text="positive" />
 
     <Button
-        style="@style/ButtonNeutralStyle"
-        android:id="@+id/button_reveal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/button_show"/>
-
-    <Button
+        android:id="@+id/button_negative"
         style="@style/ButtonNegativeStyle"
-        android:id="@+id/button_incorrect"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="24dp"
         android:text="@string/button_incorrect"
         android:textSize="12sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.3"
         tools:text="negative" />
-
-    <Button
-        style="@style/ButtonNeutralStyle"
-        android:visibility="gone"
-        android:id="@+id/button_hide_ad"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/button_skip_ad"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

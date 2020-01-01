@@ -13,6 +13,7 @@
     <color name="middleGradient">#800080</color>
 
     <color name="textBlack">#000000</color>
+    <color name="textSecondaryBlack">#777777</color>
     <color name="textWhite">#FFFFFF</color>
     <color name="textSecondaryWhite">#FAFAFA</color>
 </resources>
