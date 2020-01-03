@@ -75,9 +75,6 @@
             android:id="@+id/fragment_learn_frame"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
-        <include layout="@layout/card_frame"/>
-
     </androidx.cardview.widget.CardView>
 
     <Button
