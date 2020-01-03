@@ -5,7 +5,7 @@
     android:id="@+id/card_frame_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="450dp">
+    android:minHeight="400dp">
 
     <TextView
         android:id="@+id/text_word"
