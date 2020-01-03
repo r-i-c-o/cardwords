@@ -101,11 +101,11 @@ class SettingsFragment : Fragment(), OnItemClickListener {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             return when (viewType) {
                 VIEW_NUM -> {
-                    val view = LayoutInflater.from(parent.context).inflate(R.layout.cell_text_num, parent, false)
+                    val view = LayoutInflater.from(parent.context).inflate(R.layout.item_text_num, parent, false)
                     TextNumberRow(view)
                 }
                 VIEW_SWITCH -> {
-                    val view = LayoutInflater.from(parent.context).inflate(R.layout.cell_text_switch, parent, false)
+                    val view = LayoutInflater.from(parent.context).inflate(R.layout.item_text_switch, parent, false)
                     TextSwitchRow(view)
                 }
                 VIEW_TEXT -> {
@@ -113,7 +113,7 @@ class SettingsFragment : Fragment(), OnItemClickListener {
                     TextRow(view)
                 }
                 else -> {
-                    val view = LayoutInflater.from(parent.context).inflate(R.layout.cell_empty, parent, false)
+                    val view = LayoutInflater.from(parent.context).inflate(R.layout.item_empty, parent, false)
                     EmptyRow(view)
                 }
             }

@@ -24,7 +24,6 @@ class OneButtonDialog(private val dialogText: String): DialogFragment() {
         val textDialog = v?.findViewById<TextView>(R.id.dialog_text)
         textDialog?.text = dialogText
         builder.setView(v)
-        val dialog = builder.create()
-        return dialog
+        return builder.create()
     }
 }

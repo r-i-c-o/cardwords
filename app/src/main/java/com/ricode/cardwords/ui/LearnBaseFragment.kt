@@ -192,7 +192,7 @@ abstract class LearnBaseFragment : Fragment(), IView{
         button_neutral.visibility = View.VISIBLE
         button_neutral.setText(R.string.button_skip_ad)
         //button_hide_ad.visibility = View.VISIBLE
-        val adView = LayoutInflater.from(activity).inflate(R.layout.ad_unified, fragment_learn_frame, false) as UnifiedNativeAdView
+        val adView = LayoutInflater.from(activity).inflate(R.layout.ad_frame, fragment_learn_frame, false) as UnifiedNativeAdView
         populateNativeAd(ad, adView)
         fragment_learn_frame.addView(adView)
     }

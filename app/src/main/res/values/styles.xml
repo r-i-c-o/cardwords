@@ -33,7 +33,7 @@
 
     <style name="AppDialogDark" parent="Theme.MaterialComponents.Dialog.Alert">
         <item name="android:textColorPrimary">@color/textWhite</item>
-        <item name="android:background">@color/colorPrimaryDarkNight</item>
+        <item name="android:background">@color/colorPrimaryNight</item>
         <item name="textColorAlertDialogListItem">@color/textWhite</item>
     </style>
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CardWords</string>
+    <string name="app_name" translatable="false">CardWords</string>
     <string name="test_name">Test</string>
     <string name="learn_name">Learn</string>
     <string name="settings_name">Settings</string>
@@ -16,8 +16,7 @@
     <string name="button_correct">Correct!</string>
     <string name="button_incorrect">Incorrect</string>
     <string name="words_left_learn">Words left to learn: %d</string>
-    <string name="words_left_test">Words left to test: %d</string>
-    <string name="continue_dialog">Continue learning?</string>
+    <string name="words_left_test">Words left to check: %d</string>
     <string name="ad_title">And card with ad, to support the app</string>
     <string name="button_skip_ad">Skip ad</string>
     <string name="continue_dialog_text">Great job! Continue learning?</string>
@@ -30,11 +29,9 @@
     <string name="settings_number_of_words">Number of words</string>
     <string name="settings_number_of_words_summary">Set the number of words in "Learn" list</string>
     <string name="version_app">Version</string>
-    <string name="version_app_summary">0.9b</string>
+    <string name="version_app_summary" translatable="false">0.9b</string>
     <string name="settings_category_other">Other</string>
     <string name="settings_darkmode">Dark mode</string>
-    <string name="settings_darkmode_summary">Enable dark mode</string>
-    <string name="settings_category_appearance">Appearance</string>
     <string name="settings_swipemode_summary">Enable to use swipes instead of buttons </string>
     <string name="settings_tries">Number of tries</string>
     <string name="settings_tries_summary">Set the number of tries</string>

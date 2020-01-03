@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">CardWords</string>
     <string name="button_settings">Настройки</string>
     <string name="button_test">Тест</string>
-    <string name="continue_dialog">Продолжить обучение</string>
     <string name="menu_settings">Настройки</string>
-    <string name="settings_category_appearance">Внешний вид</string>
     <string name="settings_darkmode">Ночная тема</string>
-    <string name="settings_darkmode_summary">Включить ночную тему</string>
     <string name="settings_name">Настройки</string>
     <string name="settings_number_of_words">Количество слов</string>
     <string name="settings_number_of_words_summary">Установите количество слов для изучения</string>
