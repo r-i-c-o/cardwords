@@ -8,13 +8,12 @@ import java.util.ArrayList;
 
 public class ListComposer {
 
-    private int _numOfWords;
+    private Context mContext;
     private WordManager mManager;
 
     public ListComposer(Context context) {
-        Context mContext = context.getApplicationContext();
+        mContext = context.getApplicationContext();
         mManager = new WordManager(mContext);
-        _numOfWords = new AppSettings(mContext).getNumberOfWords();
     }
 
     public ArrayList<Word> getWordsFromLearn() {
@@ -28,15 +27,16 @@ public class ListComposer {
     private ArrayList<Word> makeLearnList() {
         ArrayList<Word> list = mManager.getAllWordsFromFile(PackNames.LEARN);
         if (list.isEmpty()) {
+            int numOfWords = new AppSettings(mContext).getNumberOfWords();
             ArrayList<Word> repeatList = mManager.getAllWordsFromFile(PackNames.REPEAT);
-            if (repeatList.size() < _numOfWords) {
-                ArrayList<Word> learnList = mManager.getNWordsFromCurrentPosition(_numOfWords - repeatList.size());
+            if (repeatList.size() < numOfWords) {
+                ArrayList<Word> learnList = mManager.getNWordsFromCurrentPosition(numOfWords - repeatList.size());
                 repeatList.addAll(learnList);
                 list.addAll(repeatList);
                 repeatList.clear();
             } else {
-                list.addAll(repeatList.subList(0, _numOfWords));
-                repeatList.subList(0, _numOfWords).clear();
+                list.addAll(repeatList.subList(0, numOfWords));
+                repeatList.subList(0, numOfWords).clear();
             }
             mManager.rewriteWordsInFile(PackNames.REPEAT, repeatList);
             mManager.rewriteWordsInFile(PackNames.LEARN, list);
