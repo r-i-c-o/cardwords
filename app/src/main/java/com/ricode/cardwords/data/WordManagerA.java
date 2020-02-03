@@ -1,6 +1,10 @@
+/*
 package com.ricode.cardwords.data;
 
 import android.content.Context;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 import com.ricode.cardwords.files.AppSettings;
 import com.ricode.cardwords.utilities.ConstantsKt;
@@ -30,14 +34,13 @@ public class WordManager {
         return getFile(file).length() <= ConstantsKt.UNICODE_EMPTY;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     ArrayList<Word> getNWordsFromCurrentPosition(int numberOfWords) {
         ArrayList<Word> words = new ArrayList<>();
         int position = mPackHelper.getPackPosition();
         int counter = 1;
         String line;
-        BufferedReader reader = null;
-        try {
-            reader = new BufferedReader(new FileReader(getFile(PackNames.PACK)));
+        try(BufferedReader reader = new BufferedReader(new FileReader(getFile(PackNames.PACK)))){
             while ((line = reader.readLine()) != null) {
                 if ((counter - position) >= numberOfWords) {
                     setWordsPosition(counter);
@@ -51,14 +54,6 @@ public class WordManager {
             }
         } catch (IOException ioe) {
             //Log.e(TAG, "Failed to make a N-words list" + ioe);
-        } finally {
-            try {
-                if (reader != null) {
-                    reader.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
         return words;
     }
@@ -66,9 +61,7 @@ public class WordManager {
     ArrayList<Word> getAllWordsFromFile(PackNames filename) {
         ArrayList<Word> words = new ArrayList<>();
         if (!isFileEmpty(filename)) {
-            BufferedReader reader = null;
-            try {
-                reader = new BufferedReader(new FileReader(getFile(filename)));
+            try (BufferedReader reader = new BufferedReader(new FileReader(getFile(filename)))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     if (!line.isEmpty()) {
@@ -79,23 +72,12 @@ public class WordManager {
             } catch (IOException ioe) {
                 //Log.e(TAG, "Couldn't open " + filename + " file: " + ioe);
             }
-            finally {
-                try {
-                    if (reader != null) {
-                        reader.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
         return words;
     }
 
     public void rewriteWordsInFile(PackNames filename, List<Word> words) {
-        BufferedWriter writer = null;
-        try {
-            writer = new BufferedWriter(new FileWriter(getFile(filename)));
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(getFile(filename)))) {
             if (!words.isEmpty()){
                 for (Word w : words) {
                     String title = w.getTitle();
@@ -110,21 +92,10 @@ public class WordManager {
         } catch (IOException ioe1) {
             //Log.e(TAG, "Failed to write words down to " + filename + " file" + ioe1);
         }
-        finally {
-            try {
-                if (writer != null) {
-                    writer.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     public void appendWordToFile(PackNames filename, Word w) {
-        BufferedWriter writer = null;
-        try {
-            writer = new BufferedWriter(new FileWriter(getFile(filename), true));
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(getFile(filename), true))){
             String title = w.getTitle();
             String tb = w.getTranscription();
             String tr = w.getTranslation();
@@ -132,14 +103,6 @@ public class WordManager {
             writer.append(complete);
         } catch (IOException ioe1) {
             //Log.e(TAG, "Failed to append word to " + filename + " file:" + ioe1);
-        } finally {
-            try {
-                if (writer != null) {
-                    writer.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 
@@ -152,4 +115,4 @@ public class WordManager {
         String[] components = string.split("\t");
         return new Word(components[0], components[1], components[2], tries);
     }
-}
+}*/

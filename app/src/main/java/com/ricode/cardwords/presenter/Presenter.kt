@@ -35,7 +35,6 @@ abstract class Presenter(val mView: IView, context: Context) : IPresenter {
     override fun onNeutralButtonClicked() {
         if (!isAdShown) onRevealButtonClicked()
         else onHideAdButtonClicked()
-
     }
 
     override fun onHideAdButtonClicked() {
