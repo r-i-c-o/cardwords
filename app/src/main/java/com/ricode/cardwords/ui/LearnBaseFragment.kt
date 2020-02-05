@@ -61,9 +61,6 @@ abstract class LearnBaseFragment : Fragment(), IView{
         button_negative.setOnClickListener {
             mPresenter.onNegativeButtonClicked()
         }
-        /*button_hide_ad.setOnClickListener {
-            mPresenter.onHideAdButtonClicked()
-        }*/
         button_back.setOnClickListener {
             findNavController().navigateUp()
         }
@@ -191,7 +188,6 @@ abstract class LearnBaseFragment : Fragment(), IView{
         ad_card_text.visibility = View.VISIBLE
         button_neutral.visibility = View.VISIBLE
         button_neutral.setText(R.string.button_skip_ad)
-        //button_hide_ad.visibility = View.VISIBLE
         val adView = LayoutInflater.from(activity).inflate(R.layout.ad_frame, fragment_learn_frame, false) as UnifiedNativeAdView
         populateNativeAd(ad, adView)
         fragment_learn_frame.addView(adView)
@@ -200,7 +196,6 @@ abstract class LearnBaseFragment : Fragment(), IView{
     override fun hideAd() {
         ad_card_text.visibility = View.GONE
         button_neutral.visibility = View.GONE
-        //button_hide_ad.visibility = View.GONE
         fragment_learn_frame.removeAllViews()
     }
 

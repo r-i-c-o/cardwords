@@ -130,12 +130,10 @@
 
                     <Button
                         android:id="@+id/ad_call_to_action"
-
+                        style="@style/ButtonNeutralStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@color/blueGradient"
                         android:gravity="center"
-                        android:textColor="@color/textWhite"
                         android:textSize="12sp"
                         tools:text="go" />
                 </LinearLayout>
