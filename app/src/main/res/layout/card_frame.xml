@@ -5,11 +5,11 @@
     android:id="@+id/card_frame_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:minHeight="250dp">
 
     <TextView
         android:id="@+id/text_word"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
@@ -25,7 +25,7 @@
 
     <TextView
         android:id="@+id/text_transcribe"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
@@ -33,7 +33,7 @@
         android:text=""
         android:textAlignment="center"
         android:textSize="18sp"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_word"
@@ -41,20 +41,21 @@
 
     <TextView
         android:id="@+id/text_translate"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
-
+        android:gravity="center"
         android:text=""
         android:textAlignment="center"
         android:textSize="18sp"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_transcribe"
-        tools:text="transcription transcription transcription" />
+        tools:text="transcription transcription transcription"
+        tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>

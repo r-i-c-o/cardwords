@@ -7,8 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.StartFragment"
     android:id="@+id/startLayout"
-    android:gravity="center"
-    android:elevation="10dp">
+    android:gravity="center">
 
     <!-- Upper row -->
     <LinearLayout

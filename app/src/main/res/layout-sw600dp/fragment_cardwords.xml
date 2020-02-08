@@ -80,13 +80,14 @@
 
     <Button
         android:id="@+id/button_neutral"
-        style="@style/ButtonNeutralStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="24dp"
+        android:background="@color/middleGradient"
         android:text="@string/button_show"
+        android:textColor="@color/textWhite"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -95,12 +96,13 @@
 
     <Button
         android:id="@+id/button_positive"
-        style="@style/ButtonPositiveStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="24dp"
+        android:background="@color/blueGradient"
         android:text="@string/button_correct"
+        android:textColor="@color/textWhite"
         android:textSize="24sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -110,12 +112,13 @@
 
     <Button
         android:id="@+id/button_negative"
-        style="@style/ButtonNegativeStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="24dp"
+        android:background="@color/redGradient"
         android:text="@string/button_incorrect"
+        android:textColor="@color/textWhite"
         android:textSize="24sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"

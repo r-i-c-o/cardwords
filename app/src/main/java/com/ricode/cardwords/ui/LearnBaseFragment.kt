@@ -3,13 +3,14 @@ package com.ricode.cardwords.ui
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.RatingBar
-import android.widget.TextView
+import android.widget.*
+import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.ads.formats.UnifiedNativeAd
@@ -29,6 +30,7 @@ abstract class LearnBaseFragment : Fragment(), IView{
     private lateinit var textWord: TextView
     private lateinit var textTranscription: TextView
     private lateinit var textTranslation: TextView
+    private lateinit var cardFrame: FrameLayout
 
     protected abstract fun setPresenter(): IPresenter
 
@@ -41,7 +43,9 @@ abstract class LearnBaseFragment : Fragment(), IView{
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_cardwords, container, false)
+        val v: View = inflater.inflate(R.layout.fragment_cardwords, container, false)
+        cardFrame = v.findViewById(R.id.fragment_learn_frame)
+        return v
     }
 
     override fun onDestroy() {
@@ -143,17 +147,17 @@ abstract class LearnBaseFragment : Fragment(), IView{
     }
 
     override fun setWordsCard() {
-        val cardView = LayoutInflater.from(activity).inflate(R.layout.card_frame, fragment_learn_frame, false)
-        textWord = cardView.findViewById(R.id.text_word)
-        textTranscription = cardView.findViewById(R.id.text_transcribe)
-        textTranslation = cardView.findViewById(R.id.text_translate)
-        fragment_learn_frame.addView(cardView)
+        val wordView = LayoutInflater.from(activity).inflate(R.layout.card_frame, cardFrame, false)
+        textWord = wordView.findViewById(R.id.text_word)
+        textTranscription = wordView.findViewById(R.id.text_transcribe)
+        textTranslation = wordView.findViewById(R.id.text_translate)
+        cardFrame.addView(wordView)
         words_left.visibility = View.VISIBLE
         button_neutral.setText(R.string.button_show)
     }
 
     override fun hideCard() {
-        fragment_learn_frame.removeAllViews()
+        cardFrame.removeAllViews()
         words_left.visibility = View.GONE
     }
 
@@ -161,6 +165,7 @@ abstract class LearnBaseFragment : Fragment(), IView{
         textWord.text = word.title
         textTranscription.text = word.transcription
         textTranslation.text = word.translation
+
 
     }
 
@@ -188,15 +193,15 @@ abstract class LearnBaseFragment : Fragment(), IView{
         ad_card_text.visibility = View.VISIBLE
         button_neutral.visibility = View.VISIBLE
         button_neutral.setText(R.string.button_skip_ad)
-        val adView = LayoutInflater.from(activity).inflate(R.layout.ad_frame, fragment_learn_frame, false) as UnifiedNativeAdView
+        val adView = LayoutInflater.from(activity).inflate(R.layout.ad_frame, cardFrame, false) as UnifiedNativeAdView
         populateNativeAd(ad, adView)
-        fragment_learn_frame.addView(adView)
+        cardFrame.addView(adView)
     }
 
     override fun hideAd() {
         ad_card_text.visibility = View.GONE
         button_neutral.visibility = View.GONE
-        fragment_learn_frame.removeAllViews()
+        cardFrame.removeAllViews()
     }
 
     override fun hideTranslation() {
