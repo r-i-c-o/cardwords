@@ -29,7 +29,7 @@
     <string name="settings_number_of_words">Number of words</string>
     <string name="settings_number_of_words_summary">Set the number of words in "Learn" list</string>
     <string name="version_app">Version</string>
-    <string name="version_app_summary" translatable="false">0.9b</string>
+    <string name="version_app_summary" translatable="false">0.9e</string>
     <string name="settings_category_other">Other</string>
     <string name="settings_darkmode">Dark mode</string>
     <string name="settings_swipemode_summary">Enable to use swipes instead of buttons </string>
