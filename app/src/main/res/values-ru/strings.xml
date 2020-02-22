@@ -34,4 +34,5 @@
     <string name="dialog_dismiss">Скрыть</string>
     <string name="version_app">Версия</string>
     <string name="words_left_test">Осталось проверить слов: %d</string>
+    <string name="progress_title">Пройдено: %d</string>
 </resources>

@@ -24,7 +24,7 @@ public class PackHelper {
         return mContext.getSharedPreferences(ConstantsKt.SP_PACK_PROPERTIES + "_" + getCurrentPackName(), Context.MODE_PRIVATE);
     }
 
-    private String getCurrentPackName(){
+    public String getCurrentPackName(){
         return getAppSettings().getString(ConstantsKt.SP_NAME_CURRENT_PACK, "en_ru_common");
     }
 
