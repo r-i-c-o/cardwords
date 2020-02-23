@@ -5,10 +5,12 @@ import android.util.Log
 import com.ricode.cardwords.data.Repository
 import com.ricode.cardwords.data.Word
 import com.ricode.cardwords.services.AdsService
+import com.ricode.cardwords.services.TtsService
 
 abstract class Presenter(val mView: IView, context: Context) : IPresenter {
 
     private val adService = AdsService(context)
+    private val ttsService = TtsService(context)
     protected val repository = Repository.getInstance(context)
     private var isAdShown = false
 
@@ -35,6 +37,10 @@ abstract class Presenter(val mView: IView, context: Context) : IPresenter {
     override fun onNeutralButtonClicked() {
         if (!isAdShown) onRevealButtonClicked()
         else onHideAdButtonClicked()
+    }
+
+    override fun onSpeakButtonClicked() {
+        ttsService.speak(mWordList[mIndex].title ?: "")
     }
 
     override fun onHideAdButtonClicked() {
@@ -70,5 +76,6 @@ abstract class Presenter(val mView: IView, context: Context) : IPresenter {
 
     override fun onDestroy() {
         adService.destroyAd()
+        ttsService.shutDown()
     }
 }

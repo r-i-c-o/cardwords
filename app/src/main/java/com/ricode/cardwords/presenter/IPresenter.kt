@@ -6,6 +6,7 @@ interface IPresenter {
 
     fun onPositiveButtonClicked()
     fun onNegativeButtonClicked()
+    fun onSpeakButtonClicked()
 
     fun onNeutralButtonClicked()
     fun onRevealButtonClicked()

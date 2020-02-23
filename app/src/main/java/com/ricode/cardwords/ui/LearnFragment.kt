@@ -1,5 +1,6 @@
 package com.ricode.cardwords.ui
 
+import android.view.View
 import com.ricode.cardwords.R
 import com.ricode.cardwords.presenter.IPresenter
 import com.ricode.cardwords.presenter.LearnPresenter
@@ -13,6 +14,16 @@ class LearnFragment: LearnBaseFragment() {
 
     override fun updateTextWordsLeft(number: Int) {
         words_left.text = getString(R.string.words_left_learn, number)
+    }
+
+    override fun showGuessingButtons() {
+        super.showGuessingButtons()
+        button_speak.visibility = View.VISIBLE
+    }
+
+    override fun hideGuessingButtons() {
+        super.hideGuessingButtons()
+        button_speak.visibility = View.INVISIBLE
     }
 
     override fun endSession() {

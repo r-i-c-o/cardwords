@@ -65,6 +65,9 @@ abstract class LearnBaseFragment : Fragment(), IView{
         button_negative.setOnClickListener {
             mPresenter.onNegativeButtonClicked()
         }
+        button_speak.setOnClickListener {
+            mPresenter.onSpeakButtonClicked()
+        }
         button_back.setOnClickListener {
             findNavController().navigateUp()
         }
@@ -165,8 +168,6 @@ abstract class LearnBaseFragment : Fragment(), IView{
         textWord.text = word.title
         textTranscription.text = word.transcription
         textTranslation.text = word.translation
-
-
     }
 
     override fun showTranscription() {

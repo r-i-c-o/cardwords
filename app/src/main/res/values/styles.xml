@@ -63,4 +63,9 @@
     <style name="DialogButtonNeutral" parent="ButtonNeutralStyle">
         <item name="android:background">@drawable/button_dialog_neutral_style</item>
     </style>
+
+    <style name="ButtonSpeak" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_speak_style</item>
+        <item name="android:tint">@color/button_text_color</item>
+    </style>
 </resources>
