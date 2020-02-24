@@ -90,7 +90,8 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="invisible" />
 
 
     <Button
@@ -109,6 +110,22 @@
         app:layout_constraintWidth_percent="0.3"
         tools:text="positive" />
 
+    <ImageButton
+        android:id="@+id/button_speak"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:background="@color/middleGradient"
+        android:padding="12dp"
+        android:src="@drawable/button_speak"
+        android:tint="@color/textWhite"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_negative"
+        app:layout_constraintStart_toEndOf="@+id/button_positive"
+        tools:visibility="visible"
+        android:contentDescription="@string/button_speak_content_description" />
+
     <Button
         android:id="@+id/button_negative"
         android:layout_width="0dp"
@@ -123,6 +140,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="0.3"
-        tools:text="negative" />
+        tools:text="negative"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

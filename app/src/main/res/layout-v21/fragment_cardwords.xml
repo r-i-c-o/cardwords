@@ -120,6 +120,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button_negative"
         app:layout_constraintStart_toEndOf="@+id/button_positive"
+        android:contentDescription="@string/button_speak_content_description"
         tools:visibility="visible" />
 
     <Button
