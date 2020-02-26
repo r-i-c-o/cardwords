@@ -26,6 +26,7 @@ class SettingsFragment : Fragment(), OnItemClickListener {
     val rowWordNumber = rowCount++
     val rowWordRepeats = rowCount++
     val rowAppearanceSection = rowCount++
+    val rowTextSize = rowCount++
     val rowDarkTheme = rowCount++
     val rowVersionSection = rowCount++
     val rowAppVersion = rowCount++
@@ -102,7 +103,7 @@ class SettingsFragment : Fragment(), OnItemClickListener {
             return when (viewType) {
                 VIEW_NUM -> {
                     val view = LayoutInflater.from(parent.context).inflate(R.layout.item_text_num, parent, false)
-                    TextNumberRow(view)
+                    TextTextRow(view)
                 }
                 VIEW_SWITCH -> {
                     val view = LayoutInflater.from(parent.context).inflate(R.layout.item_text_switch, parent, false)
@@ -126,20 +127,20 @@ class SettingsFragment : Fragment(), OnItemClickListener {
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             when (holder.itemViewType) {
                 VIEW_NUM -> {
-                    val numHolder = holder as TextNumberRow
-                    var text = ""
-                    var num = 0
+                    val numHolder = holder as TextTextRow
+                    var title = ""
+                    var value = ""
                     when (position) {
                         rowWordNumber -> {
-                            text = getString(R.string.settings_number_of_words)
-                            num = mSettings.getNumberOfWords()
+                            title = getString(R.string.settings_number_of_words)
+                            value = mSettings.getNumberOfWords().toString()
                         }
                         rowWordRepeats -> {
-                            text = getString(R.string.settings_tries)
-                            num = mSettings.getNumberOfTries()
+                            title = getString(R.string.settings_tries)
+                            value = mSettings.getNumberOfTries().toString()
                         }
                     }
-                    numHolder.bind(text, num, listener, position)
+                    numHolder.bind(title, value, listener, position)
 
                 }
                 VIEW_SWITCH -> {
@@ -163,12 +164,12 @@ class SettingsFragment : Fragment(), OnItemClickListener {
         }
     }
 
-    class TextNumberRow(itemView: View): RecyclerView.ViewHolder(itemView) {
+    class TextTextRow(itemView: View): RecyclerView.ViewHolder(itemView) {
         val text: TextView = itemView.findViewById(R.id.cell_text_num)
         private val number: TextView = itemView.findViewById(R.id.cell_num)
-        fun bind(settingText: String, settingNumber: Int, listener: OnItemClickListener, position: Int) {
-            text.text = settingText
-            number.text = settingNumber.toString()
+        fun bind(settingTitle: String, settingValue: String, listener: OnItemClickListener, position: Int) {
+            text.text = settingTitle
+            number.text = settingValue
             itemView.setOnClickListener {
                 listener.onItemClick(position)
             }
@@ -194,7 +195,6 @@ class SettingsFragment : Fragment(), OnItemClickListener {
             text.text = settingText
             if (settingSummary == null) summary.visibility = View.GONE
             else summary.text = settingSummary
-
         }
     }
 
