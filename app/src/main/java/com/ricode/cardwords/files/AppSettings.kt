@@ -2,10 +2,7 @@ package com.ricode.cardwords.files
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.ricode.cardwords.utilities.SP_APP_SETTINGS
-import com.ricode.cardwords.utilities.SP_DARK_MODE
-import com.ricode.cardwords.utilities.SP_SETTINGS_NUMBER_TRIES
-import com.ricode.cardwords.utilities.SP_SETTINGS_NUMBER_WORDS
+import com.ricode.cardwords.utilities.*
 
 class AppSettings (context: Context) {
 
@@ -29,5 +26,11 @@ class AppSettings (context: Context) {
 
     fun setDarkMode(isActive: Boolean) {
         settings.edit().putBoolean(SP_DARK_MODE, isActive).apply()
+    }
+
+    fun getTextSize(): Int = settings.getInt(SP_TEXT_SIZE, 0)
+
+    fun setTextSize(sizeCode: Int) {
+        settings.edit().putInt(SP_TEXT_SIZE, sizeCode).apply()
     }
 }

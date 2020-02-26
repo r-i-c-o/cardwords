@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_settings.*
 class SettingsFragment : Fragment(), OnItemClickListener {
 
     val VIEW_EMPTY = 0
-    val VIEW_NUM = 1
+    val VIEW_TEXT_TEXT = 1
     val VIEW_SWITCH = 2
     val VIEW_TEXT = 3
 
@@ -63,6 +63,21 @@ class SettingsFragment : Fragment(), OnItemClickListener {
                 val dialog = dialogBuilder.create()
                 dialog.show()
             }
+            rowTextSize -> {
+                val dialogBuilder = AlertDialog.Builder(requireContext())
+                val array = arrayOf(
+                    getString(R.string.settings_text_size_normal),
+                    getString(R.string.settings_text_size_big),
+                    getString(R.string.settings_text_size_huge)
+                )
+                dialogBuilder.setTitle(getString(R.string.settings_text_size))
+                dialogBuilder.setItems(array) { _, which ->
+                    mSettings.setTextSize(which)
+                    updateUI()
+                }
+                val dialog = dialogBuilder.create()
+                dialog.show()
+            }
         }
     }
 
@@ -101,7 +116,7 @@ class SettingsFragment : Fragment(), OnItemClickListener {
     private inner class SettingsAdapter(val listener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             return when (viewType) {
-                VIEW_NUM -> {
+                VIEW_TEXT_TEXT -> {
                     val view = LayoutInflater.from(parent.context).inflate(R.layout.item_text_num, parent, false)
                     TextTextRow(view)
                 }
@@ -126,7 +141,7 @@ class SettingsFragment : Fragment(), OnItemClickListener {
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             when (holder.itemViewType) {
-                VIEW_NUM -> {
+                VIEW_TEXT_TEXT -> {
                     val numHolder = holder as TextTextRow
                     var title = ""
                     var value = ""
@@ -138,6 +153,14 @@ class SettingsFragment : Fragment(), OnItemClickListener {
                         rowWordRepeats -> {
                             title = getString(R.string.settings_tries)
                             value = mSettings.getNumberOfTries().toString()
+                        }
+                        rowTextSize -> {
+                            title = getString(R.string.settings_text_size)
+                            when (mSettings.getTextSize()) {
+                                0 -> value = getString(R.string.settings_text_size_normal)
+                                1 -> value = getString(R.string.settings_text_size_big)
+                                2 -> value = getString(R.string.settings_text_size_huge)
+                            }
                         }
                     }
                     numHolder.bind(title, value, listener, position)
@@ -156,7 +179,7 @@ class SettingsFragment : Fragment(), OnItemClickListener {
 
         override fun getItemViewType(position: Int): Int {
             return when (position) {
-                rowWordNumber, rowWordRepeats -> VIEW_NUM
+                rowWordNumber, rowWordRepeats, rowTextSize -> VIEW_TEXT_TEXT
                 rowDarkTheme -> VIEW_SWITCH
                 rowAppVersion -> VIEW_TEXT
                 else -> VIEW_EMPTY

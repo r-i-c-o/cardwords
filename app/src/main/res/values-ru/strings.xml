@@ -7,10 +7,8 @@
     <string name="settings_darkmode">Ночная тема</string>
     <string name="settings_name">Настройки</string>
     <string name="settings_number_of_words">Количество слов</string>
-    <string name="settings_number_of_words_summary">Установите количество слов для изучения</string>
     <string name="settings_reset">Сброс</string>
     <string name="settings_reset_summary">Сбросить прогресс</string>
-    <string name="settings_swipemode_summary">Использовать свайпы вместо кнопок</string>
     <string name="settings_tries">Повторы слов</string>
     <string name="test_name">Тест</string>
     <string name="settings_category_other">Другое</string>
@@ -22,7 +20,6 @@
     <string name="button_show">Показать перевод</string>
     <string name="button_yes">Запомнил</string>
     <string name="button_no">Не запомнил</string>
-    <string name="settings_tries_summary">Установите количество повторов для запоминания слова</string>
     <string name="button_skip_ad">Пропустить объявление</string>
     <string name="ad_title">И карточка с рекламой. Для поддержки приложения</string>
     <string name="continue_dialog_text">Молодец! Изучим ещё больше слов?</string>
@@ -36,4 +33,8 @@
     <string name="words_left_test">Осталось проверить слов: %d</string>
     <string name="progress_title">Пройдено: %d</string>
     <string name="button_speak_content_description">Произнести это слово</string>
+    <string name="settings_text_size">Размер текста</string>
+    <string name="settings_text_size_normal">Обычный</string>
+    <string name="settings_text_size_big">Большой</string>
+    <string name="settings_text_size_huge">Огромный</string>
 </resources>

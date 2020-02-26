@@ -29,14 +29,15 @@
     <string name="settings_reset">Reset</string>
     <string name="settings_reset_summary">Reset your progress </string>
     <string name="settings_number_of_words">Number of words</string>
-    <string name="settings_number_of_words_summary">Set the number of words in "Learn" list</string>
     <string name="version_app">Version</string>
     <string name="version_app_summary" translatable="false">0.9e</string>
     <string name="settings_category_other">Other</string>
     <string name="settings_darkmode">Dark mode</string>
-    <string name="settings_swipemode_summary">Enable to use swipes instead of buttons </string>
     <string name="settings_tries">Number of tries</string>
-    <string name="settings_tries_summary">Set the number of tries</string>
+    <string name="settings_text_size">Text size</string>
+    <string name="settings_text_size_normal">Normal</string>
+    <string name="settings_text_size_big">Big</string>
+    <string name="settings_text_size_huge">Huge</string>
     <!--Misc-->
     <string name="content_descr_back">Back</string>
     <string name="dialog_dismiss">Dismiss</string>
