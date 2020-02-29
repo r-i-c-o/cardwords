@@ -6,7 +6,7 @@ import com.ricode.cardwords.data.PackNames
 import com.ricode.cardwords.data.Word
 
 class LearnPresenter(view: IView, context: Context): Presenter(view, context) {
-    private val numOfTries = AppSettings(context).getNumberOfTries()
+    private val numOfTries = settings.getNumberOfTries()
     override fun getList(): ArrayList<Word> = repository.getLearnWords()
 
     override fun onPositiveButtonClicked() {

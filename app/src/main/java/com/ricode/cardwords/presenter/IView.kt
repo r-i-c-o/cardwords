@@ -19,7 +19,7 @@ interface IView {
     fun showGuessingButtons()
     fun hideGuessingButtons()
 
-    fun setWordsCard()
+    fun setWordsCard(size: Int)
     fun hideCard()
 
     fun showAd(ad: UnifiedNativeAd)

@@ -1,14 +1,15 @@
 package com.ricode.cardwords.presenter
 
 import android.content.Context
-import android.util.Log
 import com.ricode.cardwords.data.Repository
 import com.ricode.cardwords.data.Word
+import com.ricode.cardwords.files.AppSettings
 import com.ricode.cardwords.services.AdsService
 import com.ricode.cardwords.services.TtsService
 
 abstract class Presenter(val mView: IView, context: Context) : IPresenter {
 
+    val settings = AppSettings(context)
     private val adService = AdsService(context)
     private val ttsService = TtsService(context)
     protected val repository = Repository.getInstance(context)
@@ -60,7 +61,7 @@ abstract class Presenter(val mView: IView, context: Context) : IPresenter {
         adService.loadAd()
         mWordList = getList()
         if (mWordList.isNotEmpty()) {
-            mView.setWordsCard()
+            mView.setWordsCard(settings.getTextSize())
             mView.updateTextWordsLeft(mWordList.size)
             setCurrentWord()
         }

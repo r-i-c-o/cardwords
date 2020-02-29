@@ -77,7 +77,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/button_learn"
+                    android:text="@string/learn_name"
                     android:textAlignment="center"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -107,7 +107,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/button_test"
+                    android:text="@string/test_name"
                     android:textAlignment="center"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -148,7 +148,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/button_settings"
+                    android:text="@string/settings_name"
                     android:textAlignment="center"
                     android:textSize="16sp" />
             </LinearLayout>

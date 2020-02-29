@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="button_settings">Настройки</string>
-    <string name="button_test">Тест</string>
     <string name="menu_settings">Настройки</string>
     <string name="settings_darkmode">Ночная тема</string>
     <string name="settings_name">Настройки</string>
     <string name="settings_number_of_words">Количество слов</string>
-    <string name="settings_reset">Сброс</string>
-    <string name="settings_reset_summary">Сбросить прогресс</string>
     <string name="settings_tries">Повторы слов</string>
     <string name="test_name">Тест</string>
-    <string name="settings_category_other">Другое</string>
     <string name="learn_name">Обучение</string>
     <string name="button_check">Проверить перевод</string>
     <string name="button_correct">Верно!</string>
     <string name="button_incorrect">Неверно</string>
-    <string name="button_learn">Обучение</string>
     <string name="button_show">Показать перевод</string>
     <string name="button_yes">Запомнил</string>
     <string name="button_no">Не запомнил</string>

@@ -43,9 +43,4 @@
         android:name="com.ricode.cardwords.ui.LearnFragment"
         android:label="LearnFragment"
         tools:layout="@layout/fragment_cardwords"/>
-    <fragment
-        android:id="@+id/statisticFragment"
-        android:name="com.ricode.cardwords.ui.StatisticFragment"
-        android:label="fragment_statistic"
-        tools:layout="@layout/fragment_statistic" />
 </navigation>

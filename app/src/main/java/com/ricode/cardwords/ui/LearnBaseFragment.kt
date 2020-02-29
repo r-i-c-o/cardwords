@@ -3,14 +3,10 @@ package com.ricode.cardwords.ui
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.cardview.widget.CardView
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.ads.formats.UnifiedNativeAd
@@ -149,11 +145,14 @@ abstract class LearnBaseFragment : Fragment(), IView{
         view.setNativeAd(ad)
     }
 
-    override fun setWordsCard() {
+    override fun setWordsCard(size: Int) {
         val wordView = LayoutInflater.from(activity).inflate(R.layout.card_frame, cardFrame, false)
         textWord = wordView.findViewById(R.id.text_word)
+        textWord.textSize = (36 + size * 10).toFloat()
         textTranscription = wordView.findViewById(R.id.text_transcribe)
+        textTranscription.textSize = (18 + size * 8).toFloat()
         textTranslation = wordView.findViewById(R.id.text_translate)
+        textTranslation.textSize = (18 + size * 8).toFloat()
         cardFrame.addView(wordView)
         words_left.visibility = View.VISIBLE
         button_neutral.setText(R.string.button_show)
