@@ -14,9 +14,8 @@ class MainActivity : AppCompatActivity() {
         MobileAds.initialize(this) {}
     }
 
-    fun updateTheme() {
+    private fun updateTheme() {
         if (AppSettings(this).getDarkMode()) setTheme(R.style.AppThemeDark)
         else setTheme(R.style.AppTheme)
-
     }
 }
