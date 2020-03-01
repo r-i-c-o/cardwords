@@ -5,12 +5,16 @@ import androidx.room.Room
 
 class PackClient private constructor(val context: Context) {
     var currentPack: WordFileDb? = null
+    var dao: WordDao? = null
 
     fun setCurrentPack(name: String) {
-        currentPack = Room.databaseBuilder(
-            context.applicationContext,
-            WordFileDb::class.java,
-            name).build()
+        if (name.isNotEmpty()) {
+            currentPack = Room.databaseBuilder(
+                context.applicationContext,
+                WordFileDb::class.java,
+                name).build()
+            dao = currentPack?.wordDao()
+        }
     }
 
     companion object {

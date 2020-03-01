@@ -24,4 +24,7 @@ interface WordDao {
 
     @Query("select * from word where state=2")
     fun getTestWords(): List<Word>
+
+    @Query("select * from word where state=3")
+    fun getRepeatWords(): List<Word>
 }
