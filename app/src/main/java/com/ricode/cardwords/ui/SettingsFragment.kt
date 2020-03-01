@@ -54,7 +54,7 @@ class SettingsFragment : Fragment(), OnItemClickListener {
             }
             rowWordRepeats -> {
                 val dialogBuilder = AlertDialog.Builder(requireContext())
-                val array = Array(4) { i-> (i + 2).toString()}
+                val array = Array(5) { i-> (i + 1).toString()}
                 dialogBuilder.setTitle(getString(R.string.settings_tries))
                 dialogBuilder.setItems(array) { _, which ->
                     mSettings.setNumberOfTries(array[which].toInt())
