@@ -7,10 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.ricode.cardwords.R
-import com.ricode.cardwords.data.PackHelper
 import com.ricode.cardwords.data.PackNames
 import com.ricode.cardwords.data.WordManager
-import com.ricode.cardwords.files.AppSettings
 import com.ricode.cardwords.files.AssetHelper
 import kotlinx.android.synthetic.main.fragment_start.*
 
@@ -30,9 +28,6 @@ class StartFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        pack_name.text = PackHelper(requireContext()).currentPackName
-        pack_progress.text = getString(R.string.progress_title, 0)
-
         button_learn.setOnClickListener { v ->
             val navController = v.findNavController()
             navController.navigate(R.id.action_startFragment_to_learnFragment)
