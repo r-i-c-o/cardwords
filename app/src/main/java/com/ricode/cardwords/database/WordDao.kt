@@ -19,6 +19,9 @@ interface WordDao {
     @Query("select * from word where id=:id")
     fun getWord(id: Int): Word
 
+    @Query("select * from word where title=:title")
+    fun getWordByTitle(title: String): Word
+
     @Query("select * from word where state=0 limit :numberOfWords")
     fun getNUnusedWords(numberOfWords: Int): Word
 

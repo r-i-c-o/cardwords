@@ -22,7 +22,7 @@ public class WordManager {
         mAppSettings = new AppSettings(mContext);
     }
 
-    private File getFile(PackNames filename) {
+    public File getFile(PackNames filename) {
         return mPackHelper.getPackFile(filename);
     }
 

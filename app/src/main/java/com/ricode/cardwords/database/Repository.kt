@@ -24,11 +24,13 @@ class Repository private constructor(private val context: Context){
 
     fun getTestWords() = packClient.dao.getTestWords()
 
+    fun getWordByTitle(title: String) = packClient.dao.getWordByTitle(title)
+
     fun updateState(word: Word) {
         packClient.dao.updateState(word)
     }
 
-    companion object {
+    public companion object {
         private var instance: Repository? = null
 
         fun getInstance(context: Context): Repository {
