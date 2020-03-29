@@ -9,7 +9,7 @@ data class Word(
     val title: String,
     val transcription: String,
     val translation: String,
-    var state: Int,
+    var state: Int, // 0 - never used 1 - learn 2 - test 3 - repeat 4 - done
     @Ignore var tries: Int
 ) {
     @PrimaryKey var id: Int? = null
