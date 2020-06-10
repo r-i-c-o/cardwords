@@ -91,6 +91,7 @@ public class TxtToDbConverter {
                     word.setState(4);
                     repository.updateState(word);
                 }
+                //delete file
             } catch (IOException ioe) {
                 Log.e("txttodb", "Failed to convert done list" + ioe);
             } finally {

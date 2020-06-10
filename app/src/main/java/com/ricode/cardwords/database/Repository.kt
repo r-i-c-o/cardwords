@@ -18,6 +18,7 @@ class Repository private constructor(private val context: Context){
                 it.tries = settings.getNumberOfTries() - 1
                 dao.updateState(it)
             }
+            return newList
         }
         return list
     }
@@ -30,7 +31,7 @@ class Repository private constructor(private val context: Context){
         packClient.dao.updateState(word)
     }
 
-    public companion object {
+    companion object {
         private var instance: Repository? = null
 
         fun getInstance(context: Context): Repository {

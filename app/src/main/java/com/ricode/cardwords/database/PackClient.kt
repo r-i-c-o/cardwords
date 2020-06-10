@@ -15,6 +15,12 @@ class PackClient private constructor(val context: Context) {
         dao = currentPack.wordDao()
     }
 
+    fun importDbFromAssets() {
+        currentPack = Room.databaseBuilder(context.applicationContext, WordFileDb::class.java, "en_ru_common.db")
+            .createFromAsset("words_file/en_ru_common.db").build()
+        dao = currentPack.wordDao()
+    }
+
     companion object {
         private var instance: PackClient? = null
 

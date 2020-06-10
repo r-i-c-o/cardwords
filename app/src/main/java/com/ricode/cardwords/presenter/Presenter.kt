@@ -8,7 +8,6 @@ import com.ricode.cardwords.services.AdsService
 import com.ricode.cardwords.services.TtsService
 
 abstract class Presenter(val mView: IView, context: Context) : IPresenter {
-
     val settings = AppSettings(context)
     private val adService = AdsService(context)
     private val ttsService = TtsService(context)
