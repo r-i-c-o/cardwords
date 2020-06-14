@@ -6,7 +6,7 @@ import com.ricode.cardwords.files.AppSettings
 class Repository private constructor(private val context: Context){
     private val packClient = PackClient.getInstance(context)
 
-    fun getLearnWords(): List<Word> {
+    suspend fun getLearnWords(): List<Word> {
         val dao = packClient.dao
         val list = dao.getLearnWords()
         if (list.isEmpty()) {
@@ -23,11 +23,11 @@ class Repository private constructor(private val context: Context){
         return list
     }
 
-    fun getTestWords() = packClient.dao.getTestWords()
+    suspend fun getTestWords() = packClient.dao.getTestWords()
 
-    fun getWordByTitle(title: String) = packClient.dao.getWordByTitle(title)
+    suspend fun getWordByTitle(title: String) = packClient.dao.getWordByTitle(title)
 
-    fun updateState(word: Word) {
+    suspend fun updateState(word: Word) {
         packClient.dao.updateState(word)
     }
 

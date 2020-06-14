@@ -11,8 +11,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.ricode.cardwords.R
+import com.ricode.cardwords.data.PackNames
+import com.ricode.cardwords.database.Repository
+import com.ricode.cardwords.database.TxtToDbConverter
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class RebuildingFragment : Fragment() {
 
@@ -20,6 +27,9 @@ class RebuildingFragment : Fragment() {
     lateinit var bg: ImageView
     lateinit var progressBar: ProgressBar
     lateinit var infoText: TextView
+
+    lateinit var repository: Repository
+    lateinit var converter: TxtToDbConverter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,6 +40,10 @@ class RebuildingFragment : Fragment() {
         bg = v.findViewById(R.id.rebuildBg)
         progressBar = v.findViewById(R.id.rebuildProgress)
         infoText = v.findViewById(R.id.rebuildText)
+
+        repository = Repository.getInstance(requireContext())
+        converter = TxtToDbConverter(requireContext())
+
         return v
     }
 
@@ -90,6 +104,7 @@ class RebuildingFragment : Fragment() {
             override fun onAnimationEnd(animation: Animator?) {
                 progressBar.visibility = View.VISIBLE
                 infoText.visibility = View.VISIBLE
+                rebuild()
             }
 
             override fun onAnimationCancel(animation: Animator?) {
@@ -101,6 +116,19 @@ class RebuildingFragment : Fragment() {
             }
         })
         logoSet.start()
+    }
+
+    private fun rebuild() {
+        lifecycleScope.launch {
+            withContext(IO) { converter.convertFile(PackNames.LEARN) }
+            withContext(IO) { converter.convertFile(PackNames.TEST) }
+            withContext(IO) { converter.convertFile(PackNames.REPEAT) }
+            withContext(IO) { converter.convertFile(PackNames.DONE) }
+        }
+    }
+
+    private fun setText(text: String) {
+        infoText.text = text
     }
 
     private fun onComplete() {
