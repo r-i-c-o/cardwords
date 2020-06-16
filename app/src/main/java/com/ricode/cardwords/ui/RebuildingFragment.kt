@@ -17,6 +17,8 @@ import com.ricode.cardwords.R
 import com.ricode.cardwords.data.PackNames
 import com.ricode.cardwords.database.Repository
 import com.ricode.cardwords.database.TxtToDbConverter
+import com.ricode.cardwords.files.AppSettings
+import com.ricode.cardwords.files.AssetHelper
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -27,9 +29,11 @@ class RebuildingFragment : Fragment() {
     lateinit var bg: ImageView
     lateinit var progressBar: ProgressBar
     lateinit var infoText: TextView
+    lateinit var repeatButton: ImageView
 
     lateinit var repository: Repository
     lateinit var converter: TxtToDbConverter
+    lateinit var assetHelper: AssetHelper
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,15 +44,21 @@ class RebuildingFragment : Fragment() {
         bg = v.findViewById(R.id.rebuildBg)
         progressBar = v.findViewById(R.id.rebuildProgress)
         infoText = v.findViewById(R.id.rebuildText)
+        repeatButton = v.findViewById(R.id.repeat_button)
 
         repository = Repository.getInstance(requireContext())
         converter = TxtToDbConverter(requireContext())
+        assetHelper = AssetHelper(requireContext())
+        assetHelper.loadFiles()
 
         return v
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         revealLogo()
+        repeatButton.setOnClickListener {
+            rebuild()
+        }
     }
 
     private fun revealLogo() {
@@ -102,8 +112,6 @@ class RebuildingFragment : Fragment() {
             }
 
             override fun onAnimationEnd(animation: Animator?) {
-                progressBar.visibility = View.VISIBLE
-                infoText.visibility = View.VISIBLE
                 rebuild()
             }
 
@@ -119,11 +127,26 @@ class RebuildingFragment : Fragment() {
     }
 
     private fun rebuild() {
+        repeatButton.visibility = View.INVISIBLE
+        progressBar.visibility = View.VISIBLE
+        infoText.visibility = View.VISIBLE
         lifecycleScope.launch {
-            withContext(IO) { converter.convertFile(PackNames.LEARN) }
-            withContext(IO) { converter.convertFile(PackNames.TEST) }
-            withContext(IO) { converter.convertFile(PackNames.REPEAT) }
-            withContext(IO) { converter.convertFile(PackNames.DONE) }
+            var learnCheck = false
+            var testCheck = false
+            var repCheck = false
+            var doneCheck = false
+            setText("Импорт списка слов для запоминания")
+            withContext(IO) { learnCheck = converter.convertFile(PackNames.LEARN) }
+            setText("Импорт списка слов для проверки")
+            withContext(IO) { testCheck = converter.convertFile(PackNames.TEST) }
+            setText("Импорт списка слов для повтора")
+            withContext(IO) { repCheck = converter.convertFile(PackNames.REPEAT) }
+            setText("Импорт списка выученных слов")
+            withContext(IO) { doneCheck = converter.convertFile(PackNames.DONE) }
+            if (learnCheck && testCheck && repCheck && doneCheck)
+                onComplete()
+            else
+                onFail()
         }
     }
 
@@ -132,6 +155,13 @@ class RebuildingFragment : Fragment() {
     }
 
     private fun onComplete() {
+        AppSettings(requireContext()).setRebuilt(true)
         findNavController().navigate(R.id.action_rebuildingFragment_to_startFragment)
+    }
+
+    private fun onFail() {
+        progressBar.visibility = View.INVISIBLE
+        setText("Импорт данных завершился с ошибкой. Повторить?")
+        repeatButton.visibility = View.VISIBLE
     }
 }

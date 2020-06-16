@@ -13,7 +13,6 @@ class Repository private constructor(private val context: Context){
             val settings = AppSettings(context)
             val numOfWords = settings.getNumberOfWords()
             val newList = packClient.dao.getRepeatWords()
-
             newList.forEach {
                 it.tries = settings.getNumberOfTries() - 1
                 dao.updateState(it)
@@ -33,7 +32,6 @@ class Repository private constructor(private val context: Context){
 
     companion object {
         private var instance: Repository? = null
-
         fun getInstance(context: Context): Repository {
             return instance ?: Repository(context).also { instance = it }
         }

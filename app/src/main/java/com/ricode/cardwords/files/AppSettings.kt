@@ -33,4 +33,12 @@ class AppSettings (context: Context) {
     fun setTextSize(sizeCode: Int) {
         settings.edit().putInt(SP_TEXT_SIZE, sizeCode).apply()
     }
+
+    fun getRebuilt(): Boolean {
+        return settings.getBoolean(SP_REBUILT, false)
+    }
+
+    fun setRebuilt(isRebuilt: Boolean) {
+        settings.edit().putBoolean(SP_REBUILT, isRebuilt).apply()
+    }
 }

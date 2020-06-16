@@ -16,10 +16,9 @@ public class AssetHelper {
     public AssetHelper(Context context) {
         mAssetManager = context.getAssets();
         mClient = PackClient.Companion.getInstance(context);
-        loadFiles(context);
     }
 
-    private void loadFiles(Context context) {
+    public void loadFiles() {
         mClient.importDbFromAssets();
         /*File storageDir = context.getApplicationContext().getFilesDir();
         File packDir = new File(storageDir, "en_ru_common");
@@ -52,7 +51,7 @@ public class AssetHelper {
             int c;
             while ((c = inputStream.read(buffer)) > 0) fileOutputStream.write(buffer, 0, c);
         } catch (IOException ioe1) {
-            //Log.e("AssetH", "Can't copy files " + ioe1);
+            Log.e("AssetH", "Can't copy files " + ioe1);
         }
         finally {
             try {

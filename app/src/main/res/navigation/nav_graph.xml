@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/rebuildingFragment">
+    app:startDestination="@id/startFragment">
     <fragment
         android:id="@+id/startFragment"
         android:name="com.ricode.cardwords.ui.StartFragment"
@@ -50,6 +50,7 @@
         tools:layout="@layout/fragment_rebuilding" >
         <action
             android:id="@+id/action_rebuildingFragment_to_startFragment"
-            app:destination="@id/startFragment" />
+            app:destination="@id/startFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

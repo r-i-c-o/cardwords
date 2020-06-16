@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.ricode.cardwords.R
 import com.ricode.cardwords.data.PackHelper
 import com.ricode.cardwords.data.PackNames
@@ -20,6 +21,9 @@ class StartFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val assetHelper = AssetHelper(requireContext())
+        if (!AppSettings(requireContext()).getRebuilt()) {
+            findNavController().navigate(R.id.rebuildingFragment)
+        }
     }
 
     override fun onCreateView(

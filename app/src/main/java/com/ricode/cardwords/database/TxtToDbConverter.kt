@@ -14,7 +14,7 @@ class TxtToDbConverter(ctx: Context) {
     private val wm: WordManager = WordManager(ctx)
     private val repository: Repository = getInstance(ctx)
 
-    suspend fun convertFile(name: PackNames) {
+    suspend fun convertFile(name: PackNames): Boolean {
         val file = wm.getFile(name)
         var line: String
         if (file.length() > UNICODE_EMPTY)
@@ -31,11 +31,14 @@ class TxtToDbConverter(ctx: Context) {
                             PackNames.DONE -> word.state = 4
                         }
                         repository.updateState(word)
-                        Log.i("txttodb", "converted in $name: ${word.id} ${word.title} ${word.transcription} ${word.translation}")
+                        Log.i("txttodb", "converted in ${name.name}: ${word.id} ${word.title} ${word.transcription} ${word.translation}")
                     }
                 }
+                return true
             } catch (ioe: IOException) {
-                Log.e("txttodb", "Failed to convert $name list: $ioe")
+                Log.e("txttodb", "Failed to convert ${name.name} list: $ioe")
+                return false
             }
+        return true
     }
 }
