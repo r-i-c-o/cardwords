@@ -5,9 +5,8 @@ import androidx.room.Room
 import com.ricode.cardwords.data.PackHelper
 
 class PackClient private constructor(val context: Context) {
-    var currentPack: WordFileDb = Room.databaseBuilder(context.applicationContext, WordFileDb::class.java,
-        PackHelper(context).currentPackName).build()
-    var dao: WordDao = currentPack.wordDao()
+    lateinit var currentPack: WordFileDb
+    lateinit var dao: WordDao
 
     fun setCurrentPack(name: String) {
         currentPack = Room.databaseBuilder(context.applicationContext, WordFileDb::class.java,
@@ -15,9 +14,16 @@ class PackClient private constructor(val context: Context) {
         dao = currentPack.wordDao()
     }
 
+    fun deletePack(name: String) {
+
+    }
+
     fun importDbFromAssets() {
-        currentPack = Room.databaseBuilder(context.applicationContext, WordFileDb::class.java, "en_ru_common.db")
-            .createFromAsset("words_file/en_ru_common.db").build()
+        currentPack = Room
+            .databaseBuilder(context.applicationContext, WordFileDb::class.java, "en_ru_common.db")
+            .createFromAsset("words_file/en_ru_common.db")
+            .fallbackToDestructiveMigration()
+            .build()
         dao = currentPack.wordDao()
     }
 

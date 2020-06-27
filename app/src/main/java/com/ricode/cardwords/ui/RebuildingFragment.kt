@@ -4,6 +4,7 @@ import android.animation.Animator
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +23,7 @@ import com.ricode.cardwords.files.AssetHelper
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.File
 
 class RebuildingFragment : Fragment() {
 
@@ -49,7 +51,6 @@ class RebuildingFragment : Fragment() {
         repository = Repository.getInstance(requireContext())
         converter = TxtToDbConverter(requireContext())
         assetHelper = AssetHelper(requireContext())
-        assetHelper.loadFiles()
 
         return v
     }
@@ -131,6 +132,14 @@ class RebuildingFragment : Fragment() {
         progressBar.visibility = View.VISIBLE
         infoText.visibility = View.VISIBLE
         lifecycleScope.launch {
+            val db = context?.getDatabasePath("en_ru_common.db")?.absoluteFile
+            if (db != null) {
+                db.parentFile.deleteRecursively()
+            }
+
+            setText("Импорт наборов слов")
+            withContext(IO) { assetHelper.loadFiles() }
+
             var learnCheck = false
             var testCheck = false
             var repCheck = false
@@ -155,13 +164,15 @@ class RebuildingFragment : Fragment() {
     }
 
     private fun onComplete() {
-        AppSettings(requireContext()).setRebuilt(true)
-        findNavController().navigate(R.id.action_rebuildingFragment_to_startFragment)
+        setText("Импорт успешно завершён")
+        //AppSettings(requireContext()).setRebuilt(true)
+        //findNavController().navigate(R.id.action_rebuildingFragment_to_startFragment)
     }
 
-    private fun onFail() {
+    private fun onFail(text: String? = null) {
         progressBar.visibility = View.INVISIBLE
-        setText("Импорт данных завершился с ошибкой. Повторить?")
+        if (text == null) setText("Импорт данных завершился с ошибкой.")
+        else setText(text)
         repeatButton.visibility = View.VISIBLE
     }
 }

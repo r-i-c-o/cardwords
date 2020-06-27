@@ -19,6 +19,10 @@ interface WordDao {
     @Query("select * from word where id=:id")
     suspend fun getWord(id: Int): Word
 
+    //TODO test fun, needs to be deleted
+    @Query("select * from word")
+    suspend fun getAllWords(): List<Word>
+
     @Query("select * from word where title=:title")
     suspend fun getWordByTitle(title: String): Word
 

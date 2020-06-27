@@ -16,12 +16,17 @@ class TxtToDbConverter(ctx: Context) {
 
     suspend fun convertFile(name: PackNames): Boolean {
         val file = wm.getFile(name)
-        var line: String
+        var wordList: List<String> = ArrayList()
+        //var line: String?
         if (file.length() > UNICODE_EMPTY)
             try {
-                BufferedReader(FileReader(file)).use { reader ->
-                    while (reader.readLine().also { line = it } != null) {
-                        val components = line.split("\t".toRegex()).toTypedArray()
+                file.useLines {
+                    wordList = it.toList()
+                }
+                if (wordList.isEmpty()) return false
+                else
+                    wordList.forEach {
+                        val components = it.split("\t".toRegex()).toTypedArray()
                         val word =
                             repository.getWordByTitle(components[0])
                         when (name) {
@@ -33,10 +38,24 @@ class TxtToDbConverter(ctx: Context) {
                         repository.updateState(word)
                         Log.i("txttodb", "converted in ${name.name}: ${word.id} ${word.title} ${word.transcription} ${word.translation}")
                     }
-                }
+                /*BufferedReader(FileReader(file)).use { reader ->
+                    while (reader.readLine().also { line = it } != null) {
+                        val components = line!!.split("\t".toRegex()).toTypedArray()
+                        val word =
+                            repository.getWordByTitle(components[0])
+                        when (name) {
+                            PackNames.LEARN -> word.state = 1
+                            PackNames.TEST -> word.state = 2
+                            PackNames.REPEAT -> word.state = 3
+                            PackNames.DONE -> word.state = 4
+                        }
+                        repository.updateState(word)
+                        Log.i("txttodb", "converted in ${name.name}: ${word.id} ${word.title} ${word.transcription} ${word.translation}")
+                    }
+                }*/
                 return true
-            } catch (ioe: IOException) {
-                Log.e("txttodb", "Failed to convert ${name.name} list: $ioe")
+            } catch (e: Exception) {
+                Log.e("txttodb", "Failed to convert ${name.name} list: $e")
                 return false
             }
         return true
