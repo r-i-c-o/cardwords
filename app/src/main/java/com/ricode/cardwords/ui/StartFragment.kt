@@ -22,7 +22,7 @@ class StartFragment : Fragment() {
         super.onCreate(savedInstanceState)
         val assetHelper = AssetHelper(requireContext())
         if (!AppSettings(requireContext()).getRebuilt()) {
-            findNavController().navigate(R.id.rebuildingFragment)
+            findNavController().navigate(R.id.action_startFragment_to_rebuildingFragment)
         }
     }
 
@@ -48,11 +48,10 @@ class StartFragment : Fragment() {
                 navController.navigate(R.id.action_startFragment_to_testFragment)
             } else {
                 val dialogFragment = OneButtonDialog(getString(R.string.empty_test_dialog_text))
-                val fm = fragmentManager
-                if (fm != null) dialogFragment.show(fm, "StartFragment")
+                val fm = parentFragmentManager
+                dialogFragment.show(fm, "StartFragment")
             }
         }
-
         button_settings.setOnClickListener { v ->
             v.findNavController().navigate(R.id.action_startFragment_to_settingsFragment)
         }

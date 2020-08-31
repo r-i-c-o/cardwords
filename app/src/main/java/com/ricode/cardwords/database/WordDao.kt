@@ -19,15 +19,11 @@ interface WordDao {
     @Query("select * from word where id=:id")
     suspend fun getWord(id: Int): Word
 
-    //TODO test fun, needs to be deleted
-    @Query("select * from word")
-    suspend fun getAllWords(): List<Word>
-
     @Query("select * from word where title=:title")
     suspend fun getWordByTitle(title: String): Word
 
     @Query("select * from word where state=0 limit :numberOfWords")
-    suspend fun getNUnusedWords(numberOfWords: Int): Word
+    suspend fun getNUnusedWords(numberOfWords: Int): List<Word>
 
     @Query("select * from word where state=1")
     suspend fun getLearnWords(): List<Word>

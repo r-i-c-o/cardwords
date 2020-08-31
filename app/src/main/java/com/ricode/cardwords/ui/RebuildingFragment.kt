@@ -5,13 +5,13 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.ricode.cardwords.R
@@ -21,9 +21,10 @@ import com.ricode.cardwords.database.TxtToDbConverter
 import com.ricode.cardwords.files.AppSettings
 import com.ricode.cardwords.files.AssetHelper
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.io.File
 
 class RebuildingFragment : Fragment() {
 
@@ -36,6 +37,12 @@ class RebuildingFragment : Fragment() {
     lateinit var repository: Repository
     lateinit var converter: TxtToDbConverter
     lateinit var assetHelper: AssetHelper
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.i("rebuiltfrag", "onDestroy: operation canceled")
+        lifecycleScope.cancel()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -128,14 +135,13 @@ class RebuildingFragment : Fragment() {
     }
 
     private fun rebuild() {
+        Log.i("rebuiltfrag", "rebuilding")
         repeatButton.visibility = View.INVISIBLE
         progressBar.visibility = View.VISIBLE
         infoText.visibility = View.VISIBLE
         lifecycleScope.launch {
             val db = context?.getDatabasePath("en_ru_common.db")?.absoluteFile
-            if (db != null) {
-                db.parentFile.deleteRecursively()
-            }
+            db?.parentFile?.deleteRecursively()
 
             setText("Импорт наборов слов")
             withContext(IO) { assetHelper.loadFiles() }
@@ -152,8 +158,11 @@ class RebuildingFragment : Fragment() {
             withContext(IO) { repCheck = converter.convertFile(PackNames.REPEAT) }
             setText("Импорт списка выученных слов")
             withContext(IO) { doneCheck = converter.convertFile(PackNames.DONE) }
-            if (learnCheck && testCheck && repCheck && doneCheck)
+            if (learnCheck && testCheck && repCheck && doneCheck) {
+                setText("Импорт успешно завершён")
+                delay(1000)
                 onComplete()
+            }
             else
                 onFail()
         }
@@ -164,9 +173,9 @@ class RebuildingFragment : Fragment() {
     }
 
     private fun onComplete() {
-        setText("Импорт успешно завершён")
-        //AppSettings(requireContext()).setRebuilt(true)
-        //findNavController().navigate(R.id.action_rebuildingFragment_to_startFragment)
+        //TODO delete txt files
+        AppSettings(requireContext()).setRebuilt(true)
+        findNavController().navigate(R.id.action_rebuildingFragment_to_startFragment)
     }
 
     private fun onFail(text: String? = null) {

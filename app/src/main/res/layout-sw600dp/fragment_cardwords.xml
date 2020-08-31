@@ -63,6 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:translationZ="10dp"
         app:cardBackgroundColor="?attr/colorPrimary"
         app:cardCornerRadius="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -79,14 +80,13 @@
 
     <Button
         android:id="@+id/button_neutral"
+        style="@style/ButtonNeutralStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="24dp"
-        android:background="@color/middleGradient"
         android:text="@string/button_show"
-        android:textColor="@color/textWhite"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -96,13 +96,12 @@
 
     <Button
         android:id="@+id/button_positive"
+        style="@style/ButtonPositiveStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="24dp"
-        android:background="@color/blueGradient"
         android:text="@string/button_correct"
-        android:textColor="@color/textWhite"
         android:textSize="24sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -112,35 +111,43 @@
 
     <ImageButton
         android:id="@+id/button_speak"
+        style="@style/ButtonSpeak"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:background="@color/middleGradient"
-        android:padding="12dp"
         android:src="@drawable/button_speak"
-        android:tint="@color/textWhite"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button_negative"
         app:layout_constraintStart_toEndOf="@+id/button_positive"
-        tools:visibility="visible"
-        android:contentDescription="@string/button_speak_content_description" />
+        android:contentDescription="@string/button_speak_content_description"
+        tools:visibility="visible" />
 
     <Button
         android:id="@+id/button_negative"
+        style="@style/ButtonNegativeStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="24dp"
-        android:background="@color/redGradient"
         android:text="@string/button_incorrect"
-        android:textColor="@color/textWhite"
         android:textSize="24sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="0.3"
-        tools:text="negative"
-        tools:visibility="visible" />
+        tools:text="negative" />
+
+    <TextView
+        android:id="@+id/error_text"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/error_text"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

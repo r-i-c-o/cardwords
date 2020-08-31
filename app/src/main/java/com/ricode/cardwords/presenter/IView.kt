@@ -1,7 +1,7 @@
 package com.ricode.cardwords.presenter
 
 import com.google.android.gms.ads.formats.UnifiedNativeAd
-import com.ricode.cardwords.data.Word
+import com.ricode.cardwords.database.Word
 
 interface IView {
     fun setWord(word: Word)
@@ -26,4 +26,6 @@ interface IView {
     fun hideAd()
 
     fun endSession()
+
+    fun showError(e: Exception)
 }

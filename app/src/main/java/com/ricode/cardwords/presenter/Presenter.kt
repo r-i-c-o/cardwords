@@ -1,13 +1,16 @@
 package com.ricode.cardwords.presenter
 
 import android.content.Context
-import com.ricode.cardwords.data.Repository
-import com.ricode.cardwords.data.Word
+import com.ricode.cardwords.database.Repository
+import com.ricode.cardwords.database.Word
 import com.ricode.cardwords.files.AppSettings
 import com.ricode.cardwords.services.AdsService
 import com.ricode.cardwords.services.TtsService
+import kotlinx.coroutines.*
 
 abstract class Presenter(val mView: IView, context: Context) : IPresenter {
+    protected val presenterScope = CoroutineScope(Dispatchers.Main.immediate + SupervisorJob())
+
     val settings = AppSettings(context)
     private val adService = AdsService(context)
     private val ttsService = TtsService(context)
@@ -17,7 +20,7 @@ abstract class Presenter(val mView: IView, context: Context) : IPresenter {
     protected var mWordList: ArrayList<Word> = ArrayList()
     protected var mIndex = 0
 
-    protected abstract fun getList(): ArrayList<Word>
+    protected abstract suspend fun getList(): ArrayList<Word>
 
     protected fun incIndex() {
         mIndex = (mIndex + 1) % mWordList.size
@@ -40,7 +43,7 @@ abstract class Presenter(val mView: IView, context: Context) : IPresenter {
     }
 
     override fun onSpeakButtonClicked() {
-        ttsService.speak(mWordList[mIndex].title ?: "")
+        ttsService.speak(mWordList[mIndex].title)
     }
 
     override fun onHideAdButtonClicked() {
@@ -58,11 +61,17 @@ abstract class Presenter(val mView: IView, context: Context) : IPresenter {
 
     override fun startSession() {
         adService.loadAd()
-        mWordList = getList()
-        if (mWordList.isNotEmpty()) {
-            mView.setWordsCard(settings.getTextSize())
-            mView.updateTextWordsLeft(mWordList.size)
-            setCurrentWord()
+        presenterScope.launch {
+            try {
+                mWordList = getList()
+                if (mWordList.isNotEmpty()) {
+                    mView.setWordsCard(settings.getTextSize())
+                    mView.updateTextWordsLeft(mWordList.size)
+                    setCurrentWord()
+                }
+            } catch (e: Exception) {
+                mView.showError(e)
+            }
         }
     }
 
@@ -74,7 +83,12 @@ abstract class Presenter(val mView: IView, context: Context) : IPresenter {
         mView.showRevealButton()
     }
 
+    protected fun showError(e: Exception) {
+        mView.showError(e)
+    }
+
     override fun onDestroy() {
+        presenterScope.cancel()
         adService.destroyAd()
         ttsService.shutDown()
     }

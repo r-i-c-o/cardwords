@@ -2,40 +2,50 @@ package com.ricode.cardwords.database
 
 import android.content.Context
 import com.ricode.cardwords.files.AppSettings
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.withContext
 
 class Repository private constructor(private val context: Context){
     private val packClient = PackClient.getInstance(context)
 
-    suspend fun getLearnWords(): List<Word> {
-        val dao = packClient.dao!!
-        val list = dao.getLearnWords()
+    suspend fun getLearnWords(): ArrayList<Word> = withContext(IO) {
+        val dao = packClient.dao
+        val list: ArrayList<Word> = ArrayList(dao.getLearnWords())
         if (list.isEmpty()) {
             val settings = AppSettings(context)
             val numOfWords = settings.getNumberOfWords()
-            val newList = packClient.dao!!.getRepeatWords()
+            val newList: ArrayList<Word> = ArrayList()
+
+            val repeatList = dao.getRepeatWords()
+            if (repeatList.size <= numOfWords) {
+                newList.addAll(repeatList)
+                newList.addAll(dao.getNUnusedWords(numOfWords - repeatList.size))
+            } else {
+                newList.addAll(repeatList.subList(0, 20))
+            }
             newList.forEach {
                 it.tries = settings.getNumberOfTries() - 1
                 dao.updateState(it)
             }
-            return newList
+            return@withContext newList
         }
-        return list
+        list
     }
 
-    suspend fun getTestWords() = packClient.dao.getTestWords()
+    suspend fun getTestWords() = withContext(IO){ ArrayList(packClient.dao.getTestWords()) }
 
-    suspend fun getWordByTitle(title: String) = packClient.dao.getWordByTitle(title)
-
-    suspend fun testGetAllWords() = packClient.dao.getAllWords()
+    suspend fun getWordByTitle(title: String) = withContext(IO) { packClient.dao.getWordByTitle(title) }
 
     suspend fun updateState(word: Word) {
-        packClient.dao.updateState(word)
+        withContext(IO) { packClient.dao.updateState(word) }
     }
 
     companion object {
         private var instance: Repository? = null
         fun getInstance(context: Context): Repository {
-            return instance ?: Repository(context).also { instance = it }
+            return instance ?: synchronized(this) {
+                Repository(context).also { instance = it }
+            }
         }
     }
 

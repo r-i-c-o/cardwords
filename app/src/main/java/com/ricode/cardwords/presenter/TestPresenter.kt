@@ -1,29 +1,42 @@
 package com.ricode.cardwords.presenter
 
 import android.content.Context
-import com.ricode.cardwords.data.PackNames
+import com.ricode.cardwords.data.WordStates
+import kotlinx.coroutines.launch
 
 class TestPresenter(view: IView, context: Context): Presenter(view, context) {
 
-    override fun getList() = repository.getTestWords()
+    override suspend fun getList() = repository.getTestWords()
 
     override fun onPositiveButtonClicked() {
-        repository.appendToFile(PackNames.DONE, mWordList[mIndex])
-        removeAndRewrite()
+        presenterScope.launch {
+            try {
+                mWordList[mIndex].state = WordStates.DONE.ordinal
+                updateAndRemove()
 
-        endOrContinue()
+                endOrContinue()
+            } catch (e: Exception) {
+                showError(e)
+            }
+        }
     }
 
     override fun onNegativeButtonClicked() {
-        repository.appendToFile(PackNames.REPEAT, mWordList[mIndex])
-        removeAndRewrite()
+        presenterScope.launch {
+            try {
+                mWordList[mIndex].state = WordStates.REPEAT.ordinal
+                updateAndRemove()
 
-        endOrContinue()
+                endOrContinue()
+            } catch (e: Exception) {
+                showError(e)
+            }
+        }
     }
 
-    private fun removeAndRewrite() {
+    private suspend fun updateAndRemove() {
+        repository.updateState(mWordList[mIndex])
         mWordList.remove(mWordList[mIndex])
-        repository.rewriteWordsInFile(PackNames.TEST, mWordList)
     }
 
     private fun endOrContinue() {

@@ -33,23 +33,21 @@
 
         <Button
             android:id="@+id/button_dialog_positive"
+            style="@style/DialogButtonPositive"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/blueGradient"
             android:text="@string/continue_dialog_positive"
-            android:textColor="@color/textWhite"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/button_dialog_negative"
+            style="@style/DialogButtonNegative"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/redGradient"
             android:text="@string/continue_dialog_negative"
-            android:textColor="@color/textWhite"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
     </LinearLayout>

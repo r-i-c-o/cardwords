@@ -3,6 +3,7 @@ package com.ricode.cardwords.ui
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,13 +13,13 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.gms.ads.formats.UnifiedNativeAd
 import com.google.android.gms.ads.formats.UnifiedNativeAdView
 import com.ricode.cardwords.R
-import com.ricode.cardwords.data.Word
+import com.ricode.cardwords.database.Word
 import com.ricode.cardwords.presenter.IPresenter
 import com.ricode.cardwords.presenter.IView
 import kotlinx.android.synthetic.main.fragment_cardwords.*
 
 const val REQUEST_CONTINUE = 1
-
+private const val TAG = "LearnBaseFragment"
 abstract class LearnBaseFragment : Fragment(), IView{
 
     private lateinit var mPresenter: IPresenter
@@ -218,4 +219,11 @@ abstract class LearnBaseFragment : Fragment(), IView{
         button_negative.visibility = View.INVISIBLE
     }
 
+    override fun showError(e: Exception) {
+        hideGuessingButtons()
+        hideRevealButton()
+        hideCard()
+        error_text.visibility = View.VISIBLE
+        Log.e(TAG, "showError: ${e.printStackTrace()}")
+    }
 }

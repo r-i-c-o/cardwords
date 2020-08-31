@@ -31,4 +31,5 @@
     <string name="settings_text_size_normal">Обычный</string>
     <string name="settings_text_size_big">Большой</string>
     <string name="settings_text_size_huge">Огромный</string>
+    <string name="error_text">Возникла ошибка. Попробуйте ещё раз</string>
 </resources>

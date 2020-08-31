@@ -31,7 +31,9 @@ class PackClient private constructor(val context: Context) {
         private var instance: PackClient? = null
 
         fun getInstance(context: Context): PackClient {
-            return instance ?: PackClient(context).also { instance = it }
+            return instance ?: synchronized(this) {
+                PackClient(context).also { instance = it }
+            }
         }
     }
 }
